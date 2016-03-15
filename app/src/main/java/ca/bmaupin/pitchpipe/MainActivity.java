@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.billthefarmer.mididriver.MidiConstants;
 import org.billthefarmer.mididriver.MidiDriver;
 
 
@@ -43,6 +44,22 @@ public class MainActivity extends Activity    implements View.OnTouchListener, V
             v.setOnTouchListener(this);
 
         v = findViewById(R.id.button2);
+        if (v != null)
+            v.setOnTouchListener(this);
+
+        v = findViewById(R.id.button3);
+        if (v != null)
+            v.setOnTouchListener(this);
+
+        v = findViewById(R.id.button4);
+        if (v != null)
+            v.setOnTouchListener(this);
+
+        v = findViewById(R.id.button5);
+        if (v != null)
+            v.setOnTouchListener(this);
+
+        v = findViewById(R.id.button6);
         if (v != null)
             v.setOnTouchListener(this);
 
@@ -116,18 +133,31 @@ public class MainActivity extends Activity    implements View.OnTouchListener, V
             // Down
 
             case MotionEvent.ACTION_DOWN:
+                // 40, 45, 50, 55, 59, 64
                 switch (id)
                 {
                     case R.id.button1:
-                        sendMidi(0x90, 48, 63);
-                        sendMidi(0x90, 52, 63);
-                        sendMidi(0x90, 55, 63);
+                        sendMidi(MidiConstants.NOTE_ON, 40, 63);
                         break;
 
                     case R.id.button2:
-                        sendMidi(0x90, 55, 63);
-                        sendMidi(0x90, 59, 63);
-                        sendMidi(0x90, 62, 63);
+                        sendMidi(MidiConstants.NOTE_ON, 45, 63);
+                        break;
+
+                    case R.id.button3:
+                        sendMidi(MidiConstants.NOTE_ON, 50, 63);
+                        break;
+
+                    case R.id.button4:
+                        sendMidi(MidiConstants.NOTE_ON, 55, 63);
+                        break;
+
+                    case R.id.button5:
+                        sendMidi(MidiConstants.NOTE_ON, 59, 63);
+                        break;
+
+                    case R.id.button6:
+                        sendMidi(MidiConstants.NOTE_ON, 64, 63);
                         break;
 
                     default:
@@ -141,15 +171,27 @@ public class MainActivity extends Activity    implements View.OnTouchListener, V
                 switch (id)
                 {
                     case R.id.button1:
-                        sendMidi(0x80, 48, 0);
-                        sendMidi(0x80, 52, 0);
-                        sendMidi(0x80, 55, 0);
+                        sendMidi(MidiConstants.NOTE_OFF, 40, 63);
                         break;
 
                     case R.id.button2:
-                        sendMidi(0x80, 55, 0);
-                        sendMidi(0x80, 59, 0);
-                        sendMidi(0x80, 62, 0);
+                        sendMidi(MidiConstants.NOTE_OFF, 45, 63);
+                        break;
+
+                    case R.id.button3:
+                        sendMidi(MidiConstants.NOTE_OFF, 50, 63);
+                        break;
+
+                    case R.id.button4:
+                        sendMidi(MidiConstants.NOTE_OFF, 55, 63);
+                        break;
+
+                    case R.id.button5:
+                        sendMidi(MidiConstants.NOTE_OFF, 59, 63);
+                        break;
+
+                    case R.id.button6:
+                        sendMidi(MidiConstants.NOTE_OFF, 64, 63);
                         break;
 
                     default:
