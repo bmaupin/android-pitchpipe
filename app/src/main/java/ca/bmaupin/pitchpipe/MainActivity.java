@@ -1,19 +1,10 @@
 package ca.bmaupin.pitchpipe;
 
 import android.app.Activity;
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioTrack;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import org.billthefarmer.mididriver.GeneralMidiConstants;
@@ -21,28 +12,22 @@ import org.billthefarmer.mididriver.MidiConstants;
 import org.billthefarmer.mididriver.MidiDriver;
 
 
-public class MainActivity extends Activity    implements View.OnClickListener,
-        MidiDriver.OnMidiStartListener
-{
+public class MainActivity extends Activity
+        implements View.OnClickListener, MidiDriver.OnMidiStartListener {
     private TextView text;
 
     protected MidiDriver midi;
-    protected MediaPlayer player;
 
     // TODO: add a setting to change this
     private static final int NOTE_DURATION = 5000;
+    private int lastNotePitch = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Create midi driver
-
         midi = new MidiDriver();
-
-        // Set on touch listener
 
         View v = findViewById(R.id.button1);
         if (v != null)
@@ -70,112 +55,88 @@ public class MainActivity extends Activity    implements View.OnClickListener,
 
 //        text = (TextView)findViewById(R.id.textView2);
 
-        // Set on midi start listener
-
         if (midi != null)
             midi.setOnMidiStartListener(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    // On resume
-
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
-
-        // Start midi
 
         if (midi != null)
             midi.start();
     }
 
-    // On pause
-
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
-
-        // Stop midi
 
         if (midi != null)
             midi.stop();
-
-        // Stop player
-
-        if (player != null)
-            player.stop();
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         int id = v.getId();
 
-        switch (id)
-        {
+        switch (id) {
             // 40, 45, 50, 55, 59, 64
             case R.id.button1:
+                stopNote(lastNotePitch);
+                lastNotePitch = 40;
                 playNote(40);
                 break;
 
             case R.id.button2:
-                playNote(45);
+                stopNote(lastNotePitch);
+                lastNotePitch = 45;
+                playNote(lastNotePitch);
                 break;
 
             case R.id.button3:
-                playNote(50);
+                stopNote(lastNotePitch);
+                lastNotePitch = 50;
+                playNote(lastNotePitch);
                 break;
 
             case R.id.button4:
-                playNote(55);
+                stopNote(lastNotePitch);
+                lastNotePitch = 55;
+                playNote(lastNotePitch);
                 break;
 
             case R.id.button5:
-                playNote(59);
+                stopNote(lastNotePitch);
+                lastNotePitch = 59;
+                playNote(lastNotePitch);
                 break;
 
             case R.id.button6:
-                playNote(64);
+                stopNote(lastNotePitch);
+                lastNotePitch = 64;
+                playNote(lastNotePitch);
                 break;
-
-/*
-            case R.id.button3:
-                if (player != null)
-                {
-                    player.stop();
-                    player.release();
-                }
-
-                player = MediaPlayer.create(this, R.raw.ants);
-                player.start();
-                break;
-
-            case R.id.button4:
-                if (player != null)
-                    player.stop();
-                break;
-*/
         }
     }
 
     // Listener for sending initial midi messages when the Sonivox
     // synthesizer has been started, such as program change.
-
     @Override
     public void onMidiStart()
     {
         // Program change - harpsicord
-
-        sendMidi(0xc0, GeneralMidiConstants.CHURCH_ORGAN);
+        /* Out of range:
+            - All pipes
+            - Harmonica
+        */
+        sendMidi(0xc0, GeneralMidiConstants.CELLO);
 
         // Get the config
 /*
@@ -193,9 +154,7 @@ public class MainActivity extends Activity    implements View.OnClickListener,
     }
 
     // Send a midi message
-
-    protected void sendMidi(int m, int p)
-    {
+    protected void sendMidi(int m, int p) {
         byte msg[] = new byte[2];
 
         msg[0] = (byte) m;
@@ -205,9 +164,7 @@ public class MainActivity extends Activity    implements View.OnClickListener,
     }
 
     // Send a midi message
-
-    protected void sendMidi(int m, int n, int v)
-    {
+    protected void sendMidi(int m, int n, int v) {
         byte msg[] = new byte[3];
 
         msg[0] = (byte) m;
@@ -225,8 +182,12 @@ public class MainActivity extends Activity    implements View.OnClickListener,
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                sendMidi(MidiConstants.NOTE_OFF, notePitch, 63);
+                stopNote(notePitch);
             }
         }, NOTE_DURATION);
+    }
+
+    void stopNote(int notePitch) {
+        sendMidi(MidiConstants.NOTE_OFF, notePitch, 63);
     }
 }
