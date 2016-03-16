@@ -7,6 +7,7 @@ import android.media.AudioTrack;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,17 +16,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.billthefarmer.mididriver.GeneralMidiConstants;
 import org.billthefarmer.mididriver.MidiConstants;
 import org.billthefarmer.mididriver.MidiDriver;
 
 
-public class MainActivity extends Activity    implements View.OnTouchListener, View.OnClickListener,
+public class MainActivity extends Activity    implements View.OnClickListener,
         MidiDriver.OnMidiStartListener
 {
     private TextView text;
 
     protected MidiDriver midi;
     protected MediaPlayer player;
+
+    // TODO: add a setting to change this
+    private static final int NOTE_DURATION = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,37 +46,27 @@ public class MainActivity extends Activity    implements View.OnTouchListener, V
 
         View v = findViewById(R.id.button1);
         if (v != null)
-            v.setOnTouchListener(this);
+            v.setOnClickListener(this);
 
         v = findViewById(R.id.button2);
         if (v != null)
-            v.setOnTouchListener(this);
+            v.setOnClickListener(this);
 
         v = findViewById(R.id.button3);
         if (v != null)
-            v.setOnTouchListener(this);
+            v.setOnClickListener(this);
 
         v = findViewById(R.id.button4);
         if (v != null)
-            v.setOnTouchListener(this);
+            v.setOnClickListener(this);
 
         v = findViewById(R.id.button5);
         if (v != null)
-            v.setOnTouchListener(this);
+            v.setOnClickListener(this);
 
         v = findViewById(R.id.button6);
         if (v != null)
-            v.setOnTouchListener(this);
-
-/*
-        v = findViewById(R.id.button3);
-        if (v != null)
             v.setOnClickListener(this);
-
-        v = findViewById(R.id.button4);
-        if (v != null)
-            v.setOnClickListener(this);
-*/
 
 //        text = (TextView)findViewById(R.id.textView2);
 
@@ -120,94 +115,6 @@ public class MainActivity extends Activity    implements View.OnTouchListener, V
             player.stop();
     }
 
-    // On touch
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event)
-    {
-        int action = event.getAction();
-        int id = v.getId();
-
-        switch (action)
-        {
-            // Down
-
-            case MotionEvent.ACTION_DOWN:
-                // 40, 45, 50, 55, 59, 64
-                switch (id)
-                {
-                    case R.id.button1:
-                        sendMidi(MidiConstants.NOTE_ON, 40, 63);
-                        break;
-
-                    case R.id.button2:
-                        sendMidi(MidiConstants.NOTE_ON, 45, 63);
-                        break;
-
-                    case R.id.button3:
-                        sendMidi(MidiConstants.NOTE_ON, 50, 63);
-                        break;
-
-                    case R.id.button4:
-                        sendMidi(MidiConstants.NOTE_ON, 55, 63);
-                        break;
-
-                    case R.id.button5:
-                        sendMidi(MidiConstants.NOTE_ON, 59, 63);
-                        break;
-
-                    case R.id.button6:
-                        sendMidi(MidiConstants.NOTE_ON, 64, 63);
-                        break;
-
-                    default:
-                        return false;
-                }
-                break;
-
-            // Up
-
-            case MotionEvent.ACTION_UP:
-                switch (id)
-                {
-                    case R.id.button1:
-                        sendMidi(MidiConstants.NOTE_OFF, 40, 63);
-                        break;
-
-                    case R.id.button2:
-                        sendMidi(MidiConstants.NOTE_OFF, 45, 63);
-                        break;
-
-                    case R.id.button3:
-                        sendMidi(MidiConstants.NOTE_OFF, 50, 63);
-                        break;
-
-                    case R.id.button4:
-                        sendMidi(MidiConstants.NOTE_OFF, 55, 63);
-                        break;
-
-                    case R.id.button5:
-                        sendMidi(MidiConstants.NOTE_OFF, 59, 63);
-                        break;
-
-                    case R.id.button6:
-                        sendMidi(MidiConstants.NOTE_OFF, 64, 63);
-                        break;
-
-                    default:
-                        return false;
-                }
-                break;
-
-            default:
-                return false;
-        }
-
-        return false;
-    }
-
-    // On click
-
     @Override
     public void onClick(View v)
     {
@@ -215,6 +122,31 @@ public class MainActivity extends Activity    implements View.OnTouchListener, V
 
         switch (id)
         {
+            // 40, 45, 50, 55, 59, 64
+            case R.id.button1:
+                playNote(40);
+                break;
+
+            case R.id.button2:
+                playNote(45);
+                break;
+
+            case R.id.button3:
+                playNote(50);
+                break;
+
+            case R.id.button4:
+                playNote(55);
+                break;
+
+            case R.id.button5:
+                playNote(59);
+                break;
+
+            case R.id.button6:
+                playNote(64);
+                break;
+
 /*
             case R.id.button3:
                 if (player != null)
@@ -243,7 +175,7 @@ public class MainActivity extends Activity    implements View.OnTouchListener, V
     {
         // Program change - harpsicord
 
-        sendMidi(0xc0, 6);
+        sendMidi(0xc0, GeneralMidiConstants.CHURCH_ORGAN);
 
         // Get the config
 /*
@@ -283,5 +215,18 @@ public class MainActivity extends Activity    implements View.OnTouchListener, V
         msg[2] = (byte) v;
 
         midi.write(msg);
+    }
+
+    void playNote(final int notePitch) {
+        sendMidi(MidiConstants.NOTE_ON, notePitch, 63);
+
+        // Execute code after a certain length of time
+        // http://stackoverflow.com/a/3039718/399105
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                sendMidi(MidiConstants.NOTE_OFF, notePitch, 63);
+            }
+        }, NOTE_DURATION);
     }
 }
