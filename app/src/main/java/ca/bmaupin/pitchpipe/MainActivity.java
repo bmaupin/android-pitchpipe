@@ -14,10 +14,6 @@ import org.billthefarmer.mididriver.GeneralMidiConstants;
 import org.billthefarmer.mididriver.MidiConstants;
 import org.billthefarmer.mididriver.MidiDriver;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class MainActivity extends Activity
         implements View.OnClickListener, MidiDriver.OnMidiStartListener,
         AdapterView.OnItemSelectedListener {
@@ -72,8 +68,6 @@ public class MainActivity extends Activity
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, instrumentNames);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
-//        text = (TextView)findViewById(R.id.textView2);
 
         if (midi != null)
             midi.setOnMidiStartListener(this);
@@ -171,26 +165,6 @@ public class MainActivity extends Activity
     @Override
     public void onMidiStart()
     {
-        // Program change - harpsicord
-        /* Out of range:
-            - All pipes
-            - Harmonica
-        */
-        //sendMidi(0xc0, GeneralMidiConstants.CELLO);
-
-        // Get the config
-/*
-        int config[] = midi.config();
-        String format =
-                "maxVoices = %d\nnumChannels = %d\n" +
-                        "sampleRate = %d\nmixBufferSize = %d";
-
-        String info = String.format(format, config[0], config[1],
-                config[2], config[3]);
-
-        if (text != null)
-            text.setText(info);
-*/
     }
 
     // Send a midi message
