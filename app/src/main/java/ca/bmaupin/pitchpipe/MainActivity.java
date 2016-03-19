@@ -27,6 +27,7 @@ public class MainActivity extends Activity
 
     // TODO: add a setting to change this
     private static final int NOTE_DURATION = 5000;
+    private static final int NOTE_VELOCITY = 95;
     private int lastNotePitch = 0;
 
     @Override
@@ -61,11 +62,14 @@ public class MainActivity extends Activity
             v.setOnClickListener(this);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        List<Integer> instrumentIds = new ArrayList<Integer>();
-        for (int i=0; i<128; i++) {
-            instrumentIds.add(new Integer(i));
-        }
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, instrumentIds);
+        String[] instrumentNames = new String[]{
+                "Drawbar organ",
+                "Church organ",
+                "Reed organ",
+                "Bagpipe",
+                "Shanai"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, instrumentNames);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
@@ -80,12 +84,19 @@ public class MainActivity extends Activity
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
 
-        sendMidi(0xc0, (Integer)parent.getItemAtPosition(pos));
+        byte[] instrumentIds = new byte[]{
+                GeneralMidiConstants.DRAWBAR_ORGAN,
+                GeneralMidiConstants.CHURCH_ORGAN,
+                GeneralMidiConstants.REED_ORGAN,
+                GeneralMidiConstants.BAG_PIPE,
+                GeneralMidiConstants.SHANAI
+        };
+        sendMidi(0xc0, instrumentIds[pos]);
+        stopNote(lastNotePitch);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     @Override
@@ -165,7 +176,7 @@ public class MainActivity extends Activity
             - All pipes
             - Harmonica
         */
-        sendMidi(0xc0, GeneralMidiConstants.CELLO);
+        //sendMidi(0xc0, GeneralMidiConstants.CELLO);
 
         // Get the config
 /*
@@ -204,7 +215,7 @@ public class MainActivity extends Activity
     }
 
     void playNote(final int notePitch) {
-        sendMidi(MidiConstants.NOTE_ON, notePitch, 63);
+        sendMidi(MidiConstants.NOTE_ON, notePitch, NOTE_VELOCITY);
 
         // Execute code after a certain length of time
         // http://stackoverflow.com/a/3039718/399105
@@ -217,6 +228,6 @@ public class MainActivity extends Activity
     }
 
     void stopNote(int notePitch) {
-        sendMidi(MidiConstants.NOTE_OFF, notePitch, 63);
+        sendMidi(MidiConstants.NOTE_OFF, notePitch, NOTE_VELOCITY);
     }
 }
