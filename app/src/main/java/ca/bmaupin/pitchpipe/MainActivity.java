@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class MainActivity extends Activity
         implements View.OnClickListener, MidiDriver.OnMidiStartListener,
-        AdapterView.OnItemSelectedListener {
+        NumberPicker.OnValueChangeListener {
     private TextView text;
 
     protected MidiDriver midi;
@@ -60,14 +61,18 @@ public class MainActivity extends Activity
         if (v != null)
             v.setOnClickListener(this);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        List<Integer> instrumentIds = new ArrayList<Integer>();
-        for (int i=0; i<128; i++) {
-            instrumentIds.add(new Integer(i));
-        }
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, instrumentIds);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        /* pipe-sounding: 16, 19, 20, 109, 111
+        others that might work: 29, 30,
+        bad fit: 48, 52-53, 56-62
+        out of range: 14, 21, 22, 23, 40, 41, 43, 110
+        not sustained: 24-28, 31-39, 45-47, 49-51, 54-55, 63
+        low volume: 42, 44, 72-
+         */
+
+        NumberPicker numberPicker = (NumberPicker) findViewById(R.id.numberpicker);
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(127);
+        numberPicker.setOnValueChangedListener(this);
 
 //        text = (TextView)findViewById(R.id.textView2);
 
@@ -75,17 +80,10 @@ public class MainActivity extends Activity
             midi.setOnMidiStartListener(this);
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-
-        sendMidi(0xc0, (Integer)parent.getItemAtPosition(pos));
-    }
-
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        stopNote(lastNotePitch);
+        sendMidi(0xc0, newVal);
     }
 
     @Override
@@ -165,7 +163,7 @@ public class MainActivity extends Activity
             - All pipes
             - Harmonica
         */
-        sendMidi(0xc0, GeneralMidiConstants.CELLO);
+        //sendMidi(0xc0, GeneralMidiConstants.CELLO);
 
         // Get the config
 /*
