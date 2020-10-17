@@ -1,13 +1,13 @@
 package ca.bmaupin.pitchpipe
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-
 import org.billthefarmer.mididriver.GeneralMidiConstants
 import org.billthefarmer.mididriver.MidiConstants
 import org.billthefarmer.mididriver.MidiDriver
+import java.util.*
+import kotlin.concurrent.schedule
 
 // TODO: add a setting to change the duration
 private const val NOTE_DURATION: Long = 5000
@@ -49,15 +49,17 @@ class MainActivity : AppCompatActivity() {
         sendMidi(MidiConstants.NOTE_ON, notePitch, NOTE_VELOCITY);
 
         // Execute code after a certain length of time
-        // http://stackoverflow.com/a/3039718/399105
-        val handler = Handler()
-        handler.postDelayed(Runnable { stopNote(notePitch) }, NOTE_DURATION)
+        // https://stackoverflow.com/a/54352394/399105
+        Timer().schedule(NOTE_DURATION) {
+            stopNote(notePitch)
+        }
     }
 
     private fun stopNote(notePitch: Int) {
-        sendMidi(MidiConstants.NOTE_OFF, notePitch, NOTE_VELOCITY)
+        sendMidi(MidiConstants.NOTE_OFF, notePitch, 0)
     }
 
+    // Source: https://github.com/billthefarmer/mididriver/blob/master/app/src/main/java/org/billthefarmer/miditest/MainActivity.java
     // Send a midi message, 2 bytes
     private fun sendMidi(m: Byte, n: Byte) {
         val msg = ByteArray(2)
@@ -66,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         midi.queueEvent(msg)
     }
 
+    // Source: https://github.com/billthefarmer/mididriver/blob/master/app/src/main/java/org/billthefarmer/miditest/MainActivity.java
     // Send a midi message, 3 bytes
     private fun sendMidi(m: Byte, n: Int, v: Int) {
         val msg = ByteArray(3)
