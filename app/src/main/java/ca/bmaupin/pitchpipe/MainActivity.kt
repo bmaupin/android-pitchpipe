@@ -9,7 +9,6 @@ import org.billthefarmer.mididriver.MidiDriver
 import java.util.*
 import kotlin.concurrent.schedule
 
-// TODO: add a setting to change the duration
 private const val NOTE_DURATION: Long = 5000
 private const val NOTE_VELOCITY = 95
 
