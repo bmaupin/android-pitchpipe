@@ -6,19 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- app:cornerRadius should always be half the width/height to ensure this is a circle -->
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:onClick="onPlayButtonClick"
-        android:text="E"
-        android:textSize="50sp"
-        app:cornerRadius="75dp"
+    <include
+        android:id="@+id/instrument_buttons"
+        layout="@layout/instrument_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guitar_buttons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/guitar_buttons"
+        layout="@layout/guitar_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/instrument_buttons"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- app:cornerRadius should always be at least half the width/height to ensure this is a circle -->
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="?colorSecondary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:onClick="onPlayButtonClick"
+        android:text="E"
+        app:cornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:backgroundTint="?colorSecondary"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="A"
+        app:cornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button1" />
+
+    <Button
+        android:id="@+id/button3"
+        android:backgroundTint="?colorSecondary"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="D"
+        app:cornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="?colorSecondary"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="G"
+        app:cornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="?colorSecondary"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="B"
+        app:cornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="?colorSecondary"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="E"
+        app:cornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
