@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onPlayButtonClick(view: View) {
-        playNote(64);
+        val notePitch = view.tag.toString().toInt()
+        playNote(notePitch);
     }
 
     private fun playNote(notePitch: Int) {
