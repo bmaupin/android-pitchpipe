@@ -14,6 +14,7 @@ private const val NOTE_VELOCITY = 95
 
 class MainActivity : AppCompatActivity() {
     private lateinit var midi: MidiDriver
+    private var lastNotePitch = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,8 @@ class MainActivity : AppCompatActivity() {
 
     fun onPlayButtonClick(view: View) {
         val notePitch = view.tag.toString().toInt()
+        stopNote(lastNotePitch)
+        lastNotePitch = notePitch
         playNote(notePitch);
     }
 
