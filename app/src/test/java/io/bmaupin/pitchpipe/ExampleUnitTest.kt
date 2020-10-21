@@ -1,4 +1,4 @@
-package ca.bmaupin.pitchpipe
+package io.bmaupin.pitchpipe
 
 import org.junit.Test
 

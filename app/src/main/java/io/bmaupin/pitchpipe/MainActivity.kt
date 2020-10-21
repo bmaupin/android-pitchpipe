@@ -1,4 +1,4 @@
-package ca.bmaupin.pitchpipe
+package io.bmaupin.pitchpipe
 
 import android.os.Bundle
 import android.view.View

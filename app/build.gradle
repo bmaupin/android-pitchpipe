@@ -8,7 +8,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "ca.bmaupin.pitchpipe"
+        applicationId "io.bmaupin.pitchpipe"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
