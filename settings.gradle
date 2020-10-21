@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Minimalist pitch pipe"
+rootProject.name = "Instrument pitch pipe"
