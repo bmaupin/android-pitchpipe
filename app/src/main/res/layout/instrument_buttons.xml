@@ -6,53 +6,65 @@
     android:layout_height="match_parent">
 
     <!-- app:cornerRadius should always be at least half the width/height to ensure this is a circle -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/instrument_button1"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:autoSizeTextType="uniform"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        app:cornerRadius="50dp"
+        app:icon="@drawable/ic_guitar_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="50dp"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/instrument_button2"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginTop="10dp"
-        android:autoSizeTextType="uniform"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        app:cornerRadius="50dp"
+        app:icon="@drawable/ic_ukelele_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="50dp"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instrument_button1" />
 
     <Button
         android:id="@+id/instrument_button3"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginTop="10dp"
-        android:autoSizeTextType="uniform"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        app:cornerRadius="50dp"
+        app:icon="@drawable/ic_mandolin_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="50dp"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instrument_button2" />
 
     <Button
         android:id="@+id/instrument_button4"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginTop="10dp"
-        android:autoSizeTextType="uniform"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        app:cornerRadius="50dp"
+        app:icon="@drawable/ic_banjo_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="50dp"
+        app:cornerRadius="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instrument_button3" />
