@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Instrument pitch pipe</string>
+    <string name="action_info">Info</string>
 </resources>
