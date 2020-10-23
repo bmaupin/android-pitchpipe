@@ -1,73 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- app:cornerRadius should always be at least half the width/height to ensure this is a circle -->
-    <com.google.android.material.button.MaterialButton
+    <!-- android:stateListAnimator="@null" ensures that the button will always be under the ImageView -->
+    <Button
         android:id="@+id/instrument_button1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        app:icon="@drawable/ic_guitar_icon"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconSize="50dp"
-        app:cornerRadius="100dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@id/instrument_button2"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/instrument_button_height_percent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <!-- Use an ImageView on top of the Button because otherwise we have to hardcode the image size if we set it as a button icon -->
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_guitar_icon"
+        app:layout_constraintBottom_toBottomOf="@id/instrument_button1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/instrument_icon_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/instrument_button1"
+        app:tint="@color/white" />
 
     <Button
         android:id="@+id/instrument_button2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/button_margin"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        app:icon="@drawable/ic_ukelele_icon"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconSize="50dp"
-        app:cornerRadius="100dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@id/instrument_button3"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/instrument_button_height_percent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instrument_button1" />
 
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_ukelele_icon"
+        app:layout_constraintBottom_toBottomOf="@id/instrument_button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/instrument_icon_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/instrument_button2"
+        app:tint="@color/white" />
+
     <Button
         android:id="@+id/instrument_button3"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/button_margin"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        app:icon="@drawable/ic_mandolin_icon"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconSize="50dp"
-        app:cornerRadius="100dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@id/instrument_button4"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/instrument_button_height_percent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instrument_button2" />
 
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_mandolin_icon"
+        app:layout_constraintBottom_toBottomOf="@id/instrument_button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/instrument_icon_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/instrument_button3"
+        app:tint="@color/white" />
+
     <Button
         android:id="@+id/instrument_button4"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/button_margin"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        app:icon="@drawable/ic_banjo_icon"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconSize="50dp"
-        app:cornerRadius="100dp"
+        android:stateListAnimator="@null"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/instrument_button_height_percent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instrument_button3" />
 
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_banjo_icon"
+        app:layout_constraintBottom_toBottomOf="@id/instrument_button4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/instrument_icon_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/instrument_button4"
+        app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- As long as corner radius is bigger than the height and width it will be a circle, so use a really big radius -->
+    <dimen name="button_corner_radius">1000dp</dimen>
+    <dimen name="button_margin">10dp</dimen>
+    <dimen name="instrument_button_height_percent">0.16</dimen>
+    <dimen name="instrument_icon_height_percent">0.1</dimen>
+    <dimen name="note_button_height_percent">0.12</dimen>
+</resources>
