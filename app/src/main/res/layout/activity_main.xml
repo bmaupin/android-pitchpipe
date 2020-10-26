@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -28,16 +28,13 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/guitar_buttons"
+        app:layout_constraintEnd_toStartOf="@id/note_buttons"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar"
-
-
-        />
+        app:layout_constraintTop_toBottomOf="@id/appbar" />
 
     <include
-        android:id="@+id/guitar_buttons"
-        layout="@layout/guitar_buttons"
+        android:id="@+id/note_buttons"
+        layout="@layout/note_buttons_guitar"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

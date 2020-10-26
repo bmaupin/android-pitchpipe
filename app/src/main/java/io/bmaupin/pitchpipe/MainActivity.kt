@@ -61,29 +61,35 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun onInstrumentButtonClick(view: View) {
+    fun changeInstrument(view: View) {
         Snackbar.make(view, view.tag.toString(), Snackbar.LENGTH_SHORT)
             .show()
     }
 
-    fun onNoteButtonClick(view: View) {
-        val notePitch = view.tag.toString().toInt()
-        stopNote(lastNotePitch)
-        lastNotePitch = notePitch
-        playNote(notePitch);
-    }
+    fun playInstrumentNote(view: View) {
+        // Stop the previous note immediately
+        stopMidiNote(lastNotePitch)
 
-    private fun playNote(notePitch: Int) {
-        sendMidi(MidiConstants.NOTE_ON, notePitch, NOTE_VELOCITY);
+        // Save the current note pitch so we can use it later to stop the note
+        val currentNotePitch = view.tag.toString().toInt()
+        lastNotePitch = currentNotePitch
 
-        // Execute code after a certain length of time
+        // Play the new note
+        playMidiNote(currentNotePitch);
+
+        // TODO: Can we control the duration of the midi notes natively without having to schedule a stop event?
+        // Schedule the current note to stop
         // https://stackoverflow.com/a/54352394/399105
         Timer().schedule(NOTE_DURATION) {
-            stopNote(notePitch)
+            stopMidiNote(currentNotePitch)
         }
     }
 
-    private fun stopNote(notePitch: Int) {
+    private fun playMidiNote(notePitch: Int) {
+        sendMidi(MidiConstants.NOTE_ON, notePitch, NOTE_VELOCITY);
+    }
+
+    private fun stopMidiNote(notePitch: Int) {
         sendMidi(MidiConstants.NOTE_OFF, notePitch, 0)
     }
 
