@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import org.billthefarmer.mididriver.GeneralMidiConstants
 import org.billthefarmer.mididriver.MidiConstants
 import org.billthefarmer.mididriver.MidiDriver
@@ -60,7 +61,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun onPlayButtonClick(view: View) {
+    fun onInstrumentButtonClick(view: View) {
+        Snackbar.make(view, view.tag.toString(), Snackbar.LENGTH_SHORT)
+            .show()
+    }
+
+    fun onNoteButtonClick(view: View) {
         val notePitch = view.tag.toString().toInt()
         stopNote(lastNotePitch)
         lastNotePitch = notePitch
