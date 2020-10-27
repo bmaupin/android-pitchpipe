@@ -44,7 +44,7 @@
         android:insetBottom="0dp"
         android:onClick="changePitchPipeInstrument"
         android:stateListAnimator="@null"
-        android:tag="@string/button_tag_ukelele"
+        android:tag="@string/button_tag_ukulele"
         app:cornerRadius="@dimen/button_corner_radius"
         app:layout_constraintBottom_toTopOf="@id/instrument_button3"
         app:layout_constraintDimensionRatio="1:1"
@@ -56,7 +56,7 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_ukelele_icon"
+        android:src="@drawable/ic_ukulele_icon"
         app:layout_constraintBottom_toBottomOf="@id/instrument_button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="@dimen/instrument_icon_height_percent"

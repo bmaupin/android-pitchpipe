@@ -4,5 +4,5 @@
     <string name="button_tag_banjo">5-string banjo</string>
     <string name="button_tag_guitar">Guitar</string>
     <string name="button_tag_mandolin">Mandolin</string>
-    <string name="button_tag_ukelele">Ukelele</string>
+    <string name="button_tag_ukulele">Ukulele</string>
 </resources>
