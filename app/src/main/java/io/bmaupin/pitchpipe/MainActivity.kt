@@ -17,7 +17,7 @@ private const val NOTE_VELOCITY = 95
 
 class MainActivity : AppCompatActivity() {
     private lateinit var midi: MidiDriver
-    private var lastNotePitch = 0
+    private var stopNoteTimer = Timer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,27 +61,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun changeInstrument(view: View) {
+    fun changePitchPipeInstrument(view: View) {
         Snackbar.make(view, view.tag.toString(), Snackbar.LENGTH_SHORT)
             .show()
     }
 
-    fun playInstrumentNote(view: View) {
-        // Stop the previous note immediately
-        stopMidiNote(lastNotePitch)
-
-        // Save the current note pitch so we can use it later to stop the note
-        val currentNotePitch = view.tag.toString().toInt()
-        lastNotePitch = currentNotePitch
+    fun playPitchPipeNote(view: View) {
+        // Stop all previous notes
+        stopNoteTimer.cancel()
+        stopAllMidiNotes()
 
         // Play the new note
-        playMidiNote(currentNotePitch);
+        val notePitch = view.tag.toString().toInt()
+        playMidiNote(notePitch);
 
-        // TODO: Can we control the duration of the midi notes natively without having to schedule a stop event?
-        // Schedule the current note to stop
+        // Schedule the current note to stop; midi is a streaming protocol and so the duration cannot be set when the note is played
         // https://stackoverflow.com/a/54352394/399105
-        Timer().schedule(NOTE_DURATION) {
-            stopMidiNote(currentNotePitch)
+        stopNoteTimer = Timer()
+        stopNoteTimer.schedule(NOTE_DURATION) {
+            stopAllMidiNotes()
         }
     }
 
@@ -89,8 +87,8 @@ class MainActivity : AppCompatActivity() {
         sendMidi(MidiConstants.NOTE_ON, notePitch, NOTE_VELOCITY);
     }
 
-    private fun stopMidiNote(notePitch: Int) {
-        sendMidi(MidiConstants.NOTE_OFF, notePitch, 0)
+    private fun stopAllMidiNotes() {
+        sendMidi(MidiConstants.CONTROL_CHANGE, 123,0)
     }
 
     // Source: https://github.com/billthefarmer/mididriver/blob/master/app/src/main/java/org/billthefarmer/miditest/MainActivity.java
