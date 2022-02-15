@@ -32,14 +32,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar" />
 
-    <include
+    <ViewFlipper
         android:id="@+id/note_buttons"
-        layout="@layout/note_buttons_guitar"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/instrument_buttons"
-        app:layout_constraintTop_toBottomOf="@id/appbar" />
+        app:layout_constraintTop_toBottomOf="@id/appbar">
+
+        <include
+            android:id="@+id/note_buttons_guitar"
+            layout="@layout/note_buttons_guitar" />
+        <include
+            android:id="@+id/note_buttons_ukulele"
+            layout="@layout/note_buttons_ukulele" />
+        <include
+            android:id="@+id/note_buttons_mandolin"
+            layout="@layout/note_buttons_mandolin" />
+        <include
+            android:id="@+id/note_buttons_banjo"
+            layout="@layout/note_buttons_banjo" />
+    </ViewFlipper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

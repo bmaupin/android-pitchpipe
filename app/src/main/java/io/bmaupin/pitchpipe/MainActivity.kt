@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ViewFlipper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.snackbar.Snackbar
 import org.billthefarmer.mididriver.GeneralMidiConstants
 import org.billthefarmer.mididriver.MidiConstants
@@ -64,6 +66,35 @@ class MainActivity : AppCompatActivity() {
     fun changePitchPipeInstrument(view: View) {
         Snackbar.make(view, view.tag.toString(), Snackbar.LENGTH_SHORT)
             .show()
+
+        // Stop all previous notes
+        stopNoteTimer.cancel()
+        stopAllMidiNotes()
+
+        val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
+        var index = 0
+        when (view.tag.toString()) {
+            getString(R.string.button_tag_banjo) -> {
+                val noteButtonsBanjo = findViewById<ConstraintLayout>(R.id.note_buttons_banjo)
+                index = noteButtons.indexOfChild(noteButtonsBanjo)
+            }
+
+            getString(R.string.button_tag_guitar) -> {
+                val noteButtonsGuitar = findViewById<ConstraintLayout>(R.id.note_buttons_guitar)
+                index = noteButtons.indexOfChild(noteButtonsGuitar)
+            }
+
+            getString(R.string.button_tag_mandolin) -> {
+                val noteButtonsMandolin = findViewById<ConstraintLayout>(R.id.note_buttons_mandolin)
+                index = noteButtons.indexOfChild(noteButtonsMandolin)
+            }
+
+            getString(R.string.button_tag_ukulele) -> {
+                val noteButtonsUkulele = findViewById<ConstraintLayout>(R.id.note_buttons_ukulele)
+                index = noteButtons.indexOfChild(noteButtonsUkulele)
+            }
+        }
+        noteButtons.displayedChild = index
     }
 
     fun playPitchPipeNote(view: View) {

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="?colorSecondary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:onClick="playPitchPipeNote"
+        android:tag="55"
+        android:text="G"
+        app:autoSizeTextType="uniform"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@id/button2"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/note_button_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/button_margin"
+        android:backgroundTint="?colorSecondary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:onClick="playPitchPipeNote"
+        android:tag="62"
+        android:text="D"
+        app:autoSizeTextType="uniform"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@id/button3"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/note_button_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button1" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/button_margin"
+        android:backgroundTint="?colorSecondary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:onClick="playPitchPipeNote"
+        android:tag="69"
+        android:text="A"
+        app:autoSizeTextType="uniform"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@id/button4"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/note_button_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/button_margin"
+        android:backgroundTint="?colorSecondary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:onClick="playPitchPipeNote"
+        android:tag="76"
+        android:text="E"
+        app:autoSizeTextType="uniform"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="@dimen/note_button_height_percent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
