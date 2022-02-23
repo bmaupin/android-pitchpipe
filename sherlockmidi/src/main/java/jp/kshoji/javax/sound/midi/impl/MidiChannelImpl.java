@@ -1,6 +1,6 @@
 package jp.kshoji.javax.sound.midi.impl;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.SparseIntArray;
 
 import jp.kshoji.javax.sound.midi.InvalidMidiDataException;

@@ -1,6 +1,6 @@
 package jp.kshoji.javax.sound.midi;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * {@link Exception} thrown when unable to use {@link MidiDevice}s.

@@ -1,6 +1,6 @@
 package jp.kshoji.javax.sound.midi;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * Abstract Class for MIDI Instrument
