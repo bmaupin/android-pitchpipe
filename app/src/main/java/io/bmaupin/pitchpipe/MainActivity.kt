@@ -47,11 +47,7 @@ class MainActivity : AppCompatActivity() {
             synth!!.loadAllInstruments(soundFont)
             synth!!.channels[0].programChange(0)
             recv = synth!!.receiver
-        } catch (e: IOException) {
-            Snackbar.make(findViewById(R.id.mainLayout), "Unable to load sound font! Playing notes won't work ☹", Snackbar.LENGTH_INDEFINITE)
-                .show()
-            e.printStackTrace()
-        } catch (e: MidiUnavailableException) {
+        } catch (e: Exception) {
             Snackbar.make(findViewById(R.id.mainLayout), "Error loading the MIDI engine! Playing notes won't work ☹", Snackbar.LENGTH_INDEFINITE)
                 .show()
             e.printStackTrace()
