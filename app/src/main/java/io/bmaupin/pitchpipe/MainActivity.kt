@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var midi: MidiDriver
     private var stopNoteTimer = Timer()
 
-    private lateinit var synth: SoftSynthesizer
-    private lateinit var recv: Receiver
+    private var synth: SoftSynthesizer? = null
+    private var recv: Receiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,20 +37,23 @@ class MainActivity : AppCompatActivity() {
 
 //        midi = MidiDriver()
 
-//        TODO: remove error handling; let it crash early
         try {
             val soundFont: SF2Soundbank =
                 SF2Soundbank(
                     assets.open("SmallTimGM6mb.sf2")
                 )
             synth = SoftSynthesizer()
-            synth.open()
-            synth.loadAllInstruments(soundFont)
-            synth.channels[0].programChange(0)
-            recv = synth.receiver
+            synth!!.open()
+            synth!!.loadAllInstruments(soundFont)
+            synth!!.channels[0].programChange(0)
+            recv = synth!!.receiver
         } catch (e: IOException) {
+            Snackbar.make(findViewById(R.id.mainLayout), "Unable to load sound font! Playing notes won't work ☹", Snackbar.LENGTH_INDEFINITE)
+                .show()
             e.printStackTrace()
         } catch (e: MidiUnavailableException) {
+            Snackbar.make(findViewById(R.id.mainLayout), "Error loading the MIDI engine! Playing notes won't work ☹", Snackbar.LENGTH_INDEFINITE)
+                .show()
             e.printStackTrace()
         }
     }
@@ -73,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-            synth.close()
+            synth?.close()
     }
 
     private fun setMidiInstrument() {
@@ -151,7 +154,7 @@ class MainActivity : AppCompatActivity() {
     private fun playMidiNote(notePitch: Int) {
         val msg: ShortMessage = ShortMessage()
         msg.setMessage(ShortMessage.NOTE_ON, 0, notePitch, NOTE_VELOCITY)
-        recv.send(msg, -1)
+        recv?.send(msg, -1)
 
 //        sendMidi(MidiConstants.NOTE_ON, notePitch, NOTE_VELOCITY);
     }
