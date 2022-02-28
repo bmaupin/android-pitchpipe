@@ -20,7 +20,7 @@ import java.io.IOException
 import java.util.*
 
 private const val NOTE_DURATION: Long = 5000
-private const val NOTE_VELOCITY = 95
+private const val NOTE_VELOCITY = 127
 
 class MainActivity : AppCompatActivity() {
 //    TODO
