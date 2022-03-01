@@ -10,13 +10,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import cn.sherlock.com.sun.media.sound.SF2Soundbank
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer
 import com.google.android.material.snackbar.Snackbar
-import jp.kshoji.javax.sound.midi.MidiUnavailableException
 import jp.kshoji.javax.sound.midi.Receiver
 import jp.kshoji.javax.sound.midi.ShortMessage
 import org.billthefarmer.mididriver.GeneralMidiConstants
 import org.billthefarmer.mididriver.MidiConstants
 import org.billthefarmer.mididriver.MidiDriver
-import java.io.IOException
 import java.util.*
 
 private const val NOTE_DURATION: Long = 5000
@@ -75,9 +73,9 @@ class MainActivity : AppCompatActivity() {
             synth?.close()
     }
 
-    private fun setMidiInstrument() {
-        sendMidi(MidiConstants.PROGRAM_CHANGE, GeneralMidiConstants.BAG_PIPE)
-    }
+//    private fun setMidiInstrument() {
+//        sendMidi(MidiConstants.PROGRAM_CHANGE, GeneralMidiConstants.BAG_PIPE)
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the action bar menu
@@ -99,10 +97,9 @@ class MainActivity : AppCompatActivity() {
         Snackbar.make(view, view.tag.toString(), Snackbar.LENGTH_SHORT)
             .show()
 
-//        TODO
-//        // Stop all previous notes
-//        stopNoteTimer.cancel()
-//        stopAllMidiNotes()
+        // Stop all previous notes
+        stopNoteTimer.cancel()
+        stopAllMidiNotes()
 
         val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
         var index = 0
@@ -131,50 +128,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun playPitchPipeNote(view: View) {
-//        // Stop all previous notes
-//        stopNoteTimer.cancel()
-//        stopAllMidiNotes()
+        // Stop all previous notes
+        stopNoteTimer.cancel()
+        stopAllMidiNotes()
 
         // Play the new note
         val notePitch = view.tag.toString().toInt()
         playMidiNote(notePitch);
 
-//        // Schedule the current note to stop; midi is a streaming protocol and so the duration cannot be set when the note is played
-//        // https://stackoverflow.com/a/54352394/399105
-//        stopNoteTimer = Timer()
-//        stopNoteTimer.schedule(NOTE_DURATION) {
-//            stopAllMidiNotes()
-//        }
+        // Schedule the current note to stop; midi is a streaming protocol and so the duration cannot be set when the note is played
+        // https://stackoverflow.com/a/54352394/399105
+        stopNoteTimer = Timer()
+        stopNoteTimer.schedule(object : TimerTask() {
+            override fun run() {
+                stopAllMidiNotes()
+            }
+        }, NOTE_DURATION)
     }
 
     private fun playMidiNote(notePitch: Int) {
-        val msg: ShortMessage = ShortMessage()
-        msg.setMessage(ShortMessage.NOTE_ON, 0, notePitch, NOTE_VELOCITY)
-        recv?.send(msg, -1)
-
-//        sendMidi(MidiConstants.NOTE_ON, notePitch, NOTE_VELOCITY);
+        sendMidi(ShortMessage.NOTE_ON, notePitch, NOTE_VELOCITY);
     }
 
     private fun stopAllMidiNotes() {
-        sendMidi(MidiConstants.CONTROL_CHANGE, 123,0)
+        sendMidi(ShortMessage.CONTROL_CHANGE, 123,0)
     }
 
-    // Source: https://github.com/billthefarmer/mididriver/blob/master/app/src/main/java/org/billthefarmer/miditest/MainActivity.java
-    // Send a midi message, 2 bytes
-    private fun sendMidi(m: Byte, n: Byte) {
-        val msg = ByteArray(2)
-        msg[0] = m
-        msg[1] = n
-        midi.queueEvent(msg)
-    }
-
-    // Source: https://github.com/billthefarmer/mididriver/blob/master/app/src/main/java/org/billthefarmer/miditest/MainActivity.java
     // Send a midi message, 3 bytes
-    private fun sendMidi(m: Byte, n: Int, v: Int) {
-        val msg = ByteArray(3)
-        msg[0] = m
-        msg[1] = n.toByte()
-        msg[2] = v.toByte()
-        midi.queueEvent(msg)
+    private fun sendMidi(status: Int, data1: Int, data2: Int) {
+        val msg = ShortMessage()
+        msg.setMessage(status, data1, data2)
+        recv?.send(msg, -1)
     }
 }
