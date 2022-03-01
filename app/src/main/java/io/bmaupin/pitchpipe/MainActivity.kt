@@ -16,6 +16,7 @@ import org.billthefarmer.mididriver.GeneralMidiConstants
 import org.billthefarmer.mididriver.MidiConstants
 import org.billthefarmer.mididriver.MidiDriver
 import java.util.*
+import kotlin.concurrent.schedule
 
 private const val NOTE_DURATION: Long = 5000
 private const val NOTE_VELOCITY = 127
@@ -23,7 +24,7 @@ private const val NOTE_VELOCITY = 127
 class MainActivity : AppCompatActivity() {
 //    TODO
     private lateinit var midi: MidiDriver
-    private var stopNoteTimer = Timer()
+    private var stopNoteTimer: TimerTask? = null
 
     private var synth: SoftSynthesizer? = null
     private var recv: Receiver? = null
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             .show()
 
         // Stop all previous notes
-        stopNoteTimer.cancel()
+        stopNoteTimer?.cancel()
         stopAllMidiNotes()
 
         val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
@@ -129,7 +130,7 @@ class MainActivity : AppCompatActivity() {
 
     fun playPitchPipeNote(view: View) {
         // Stop all previous notes
-        stopNoteTimer.cancel()
+        stopNoteTimer?.cancel()
         stopAllMidiNotes()
 
         // Play the new note
@@ -138,12 +139,9 @@ class MainActivity : AppCompatActivity() {
 
         // Schedule the current note to stop; midi is a streaming protocol and so the duration cannot be set when the note is played
         // https://stackoverflow.com/a/54352394/399105
-        stopNoteTimer = Timer()
-        stopNoteTimer.schedule(object : TimerTask() {
-            override fun run() {
-                stopAllMidiNotes()
-            }
-        }, NOTE_DURATION)
+        stopNoteTimer = Timer().schedule(NOTE_DURATION){
+            stopAllMidiNotes()
+        }
     }
 
     private fun playMidiNote(notePitch: Int) {
