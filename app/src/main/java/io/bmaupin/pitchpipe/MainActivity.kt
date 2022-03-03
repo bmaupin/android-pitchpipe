@@ -55,28 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-
-//        TODO
-//        midi.stop()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-//        TODO
-//        midi.start()
-        // This needs to be called every time the app is resumed, otherwise it will reset to the default instrument
-//        setMidiInstrument()
+        stopAllMidiNotes()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-            synth?.close()
+        stopAllMidiNotes()
+        synth?.close()
     }
-
-//    private fun setMidiInstrument() {
-//        sendMidi(MidiConstants.PROGRAM_CHANGE, GeneralMidiConstants.BAG_PIPE)
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the action bar menu
@@ -98,8 +84,6 @@ class MainActivity : AppCompatActivity() {
         Snackbar.make(view, view.tag.toString(), Snackbar.LENGTH_SHORT)
             .show()
 
-        // Stop all previous notes
-        stopNoteTimer?.cancel()
         stopAllMidiNotes()
 
         val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
@@ -130,7 +114,6 @@ class MainActivity : AppCompatActivity() {
 
     fun playPitchPipeNote(view: View) {
         // Stop all previous notes
-        stopNoteTimer?.cancel()
         stopAllMidiNotes()
 
         // Play the new note
@@ -149,6 +132,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun stopAllMidiNotes() {
+        // cancel any currently running stopNoteTimer, otherwise it may trigger later while playing another note
+        stopNoteTimer?.cancel()
+        // stop any currently playing midi notes
         sendMidi(ShortMessage.CONTROL_CHANGE, 123,0)
     }
 
