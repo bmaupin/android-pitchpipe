@@ -12,9 +12,6 @@ import cn.sherlock.com.sun.media.sound.SoftSynthesizer
 import com.google.android.material.snackbar.Snackbar
 import jp.kshoji.javax.sound.midi.Receiver
 import jp.kshoji.javax.sound.midi.ShortMessage
-import org.billthefarmer.mididriver.GeneralMidiConstants
-import org.billthefarmer.mididriver.MidiConstants
-import org.billthefarmer.mididriver.MidiDriver
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -22,8 +19,6 @@ private const val NOTE_DURATION: Long = 5000
 private const val NOTE_VELOCITY = 127
 
 class MainActivity : AppCompatActivity() {
-//    TODO
-    private lateinit var midi: MidiDriver
     private var stopNoteTimer: TimerTask? = null
 
     private var synth: SoftSynthesizer? = null
@@ -34,16 +29,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-//        midi = MidiDriver()
-
         try {
-            val soundFont: SF2Soundbank =
-                SF2Soundbank(
-                    assets.open("SmallTimGM6mb.sf2")
-                )
             synth = SoftSynthesizer()
             synth!!.open()
+            val soundFont =
+                SF2Soundbank(
+                    assets.open("GeneralUser GS v1.471.sf2")
+                )
             synth!!.loadAllInstruments(soundFont)
+            // Set the instrument
             synth!!.channels[0].programChange(0)
             recv = synth!!.receiver
         } catch (e: Exception) {
