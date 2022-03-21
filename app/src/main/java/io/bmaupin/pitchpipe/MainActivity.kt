@@ -41,7 +41,11 @@ class MainActivity : AppCompatActivity() {
             synth!!.channels[0].programChange(0)
             recv = synth!!.receiver
         } catch (e: Exception) {
-            Snackbar.make(findViewById(R.id.mainLayout), "Error loading the MIDI engine! Playing notes won't work ☹", Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(
+                findViewById(R.id.mainLayout),
+                "Error loading the MIDI engine! Playing notes won't work ☹",
+                Snackbar.LENGTH_INDEFINITE
+            )
                 .show()
             e.printStackTrace()
         }
@@ -112,24 +116,24 @@ class MainActivity : AppCompatActivity() {
 
         // Play the new note
         val notePitch = view.tag.toString().toInt()
-        playMidiNote(notePitch);
+        playMidiNote(notePitch)
 
         // Schedule the current note to stop; midi is a streaming protocol and so the duration cannot be set when the note is played
         // https://stackoverflow.com/a/54352394/399105
-        stopNoteTimer = Timer().schedule(NOTE_DURATION){
+        stopNoteTimer = Timer().schedule(NOTE_DURATION) {
             stopAllMidiNotes()
         }
     }
 
     private fun playMidiNote(notePitch: Int) {
-        sendMidi(ShortMessage.NOTE_ON, notePitch, NOTE_VELOCITY);
+        sendMidi(ShortMessage.NOTE_ON, notePitch, NOTE_VELOCITY)
     }
 
     private fun stopAllMidiNotes() {
         // cancel any currently running stopNoteTimer, otherwise it may trigger later while playing another note
         stopNoteTimer?.cancel()
         // stop any currently playing midi notes
-        sendMidi(ShortMessage.CONTROL_CHANGE, 123,0)
+        sendMidi(ShortMessage.CONTROL_CHANGE, 123, 0)
     }
 
     // Send a midi message, 3 bytes
