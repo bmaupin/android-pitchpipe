@@ -1,5 +1,9 @@
 The following files are from or contain content from external sources:
 
-sherlockmidi
+app/src/main/assets/FluidR3_GM.sf2
+Source: https://packages.debian.org/search?keywords=fluid-soundfont-gm
+License: MIT
+
+sherlockmidi/
 Source: https://github.com/Antor/MidiDriver
 License: Apache 2.0, GPL 2.0 with classpath exception

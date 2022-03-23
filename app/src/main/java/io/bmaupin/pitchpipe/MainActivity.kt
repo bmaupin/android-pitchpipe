@@ -34,11 +34,11 @@ class MainActivity : AppCompatActivity() {
             synth!!.open()
             val soundFont =
                 SF2Soundbank(
-                    assets.open("GeneralUser GS v1.471.sf2")
+                    assets.open("FluidR3_GM.sf2")
                 )
             synth!!.loadAllInstruments(soundFont)
             // Set the instrument
-            synth!!.channels[0].programChange(0)
+            synth!!.channels[0].programChange(22)
             recv = synth!!.receiver
         } catch (e: Exception) {
             Snackbar.make(
