@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ViewFlipper
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import cn.sherlock.com.sun.media.sound.SF2Soundbank
@@ -69,11 +70,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_info -> true
+            R.id.action_info -> {
+                val builder: AlertDialog.Builder? = AlertDialog.Builder(this)
+                builder?.setMessage(R.string.dialog_about_content)
+                val dialog: AlertDialog? = builder?.create()
+                dialog?.show()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
