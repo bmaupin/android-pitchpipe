@@ -37,6 +37,7 @@
         android:id="@+id/note_buttons"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:visibility="invisible"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,12 +47,15 @@
         <include
             android:id="@+id/note_buttons_guitar"
             layout="@layout/note_buttons_guitar" />
+
         <include
             android:id="@+id/note_buttons_ukulele"
             layout="@layout/note_buttons_ukulele" />
+
         <include
             android:id="@+id/note_buttons_mandolin"
             layout="@layout/note_buttons_mandolin" />
+
         <include
             android:id="@+id/note_buttons_banjo"
             layout="@layout/note_buttons_banjo" />

@@ -85,6 +85,10 @@ class MainActivity : AppCompatActivity() {
         stopAllMidiNotes()
 
         val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
+
+        // The note buttons are invisible when the app first starts; make them visible when an instrument is selected
+        noteButtons.visibility = View.VISIBLE;
+
         var index = 0
         when (view.tag.toString()) {
             getString(R.string.button_tag_banjo) -> {
@@ -130,9 +134,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun stopAllMidiNotes() {
-        // cancel any currently running stopNoteTimer, otherwise it may trigger later while playing another note
+        // Cancel any currently running stopNoteTimer, otherwise it may trigger later while playing another note
         stopNoteTimer?.cancel()
-        // stop any currently playing midi notes
+        // Stop any currently playing midi notes
         sendMidi(ShortMessage.CONTROL_CHANGE, 123, 0)
     }
 
