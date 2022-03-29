@@ -6,6 +6,14 @@
     <string name="button_tag_mandolin">Mandolin</string>
     <string name="button_tag_ukulele">Ukulele</string>
 
-    <string name="dialog_about_content">Source code for this application available here: <a href="https://github.com/bmaupin/android-pitchpipe">https://github.com/bmaupin/android-pitchpipe</a>\n\nInstrument icons are from the <a href="https://thenounproject.com/thepyramidschool/">The Pyramid School</a> and licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons CC BY 3.0</a>
-    </string>
+    <string name="dialog_about_content">Source code for this application available here: <a href="https://github.com/bmaupin/android-pitchpipe">https://github.com/bmaupin/android-pitchpipe</a>\n\nInstrument icons are from the <a href="https://thenounproject.com/thepyramidschool/">The Pyramid School</a> and licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons CC BY 3.0</a></string>
+
+    <!-- See here for translations: https://en.wikipedia.org/wiki/Key_signature_names_and_translations -->
+    <string name="note_A">A</string>
+    <string name="note_B">B</string>
+    <string name="note_C">C</string>
+    <string name="note_D">D</string>
+    <string name="note_E">E</string>
+    <string name="note_F">F</string>
+    <string name="note_G">G</string>
 </resources>
