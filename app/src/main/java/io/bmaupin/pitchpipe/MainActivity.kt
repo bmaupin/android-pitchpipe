@@ -1,9 +1,11 @@
 package io.bmaupin.pitchpipe
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -76,6 +78,12 @@ class MainActivity : AppCompatActivity() {
                 builder?.setMessage(R.string.dialog_about_content)
                 val dialog: AlertDialog? = builder?.create()
                 dialog?.show()
+
+                // Make the HTML links in the dialog clickable. Must be called after show()
+                // (https://stackoverflow.com/a/3367392/399105)
+                (dialog?.findViewById<TextView>(android.R.id.message)!!).movementMethod =
+                    LinkMovementMethod.getInstance()
+
                 true
             }
             else -> super.onOptionsItemSelected(item)
