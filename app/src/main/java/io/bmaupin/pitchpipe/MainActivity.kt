@@ -5,6 +5,7 @@ import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AlertDialog
@@ -104,22 +105,22 @@ class MainActivity : AppCompatActivity() {
         var index = 0
         when (view.tag.toString()) {
             getString(R.string.button_tag_banjo) -> {
-                val noteButtonsBanjo = findViewById<ConstraintLayout>(R.id.note_buttons_banjo)
+                val noteButtonsBanjo = findViewById<LinearLayout>(R.id.note_buttons_banjo)
                 index = noteButtons.indexOfChild(noteButtonsBanjo)
             }
 
             getString(R.string.button_tag_guitar) -> {
-                val noteButtonsGuitar = findViewById<ConstraintLayout>(R.id.note_buttons_guitar)
+                val noteButtonsGuitar = findViewById<LinearLayout>(R.id.note_buttons_guitar)
                 index = noteButtons.indexOfChild(noteButtonsGuitar)
             }
 
             getString(R.string.button_tag_mandolin) -> {
-                val noteButtonsMandolin = findViewById<ConstraintLayout>(R.id.note_buttons_mandolin)
+                val noteButtonsMandolin = findViewById<LinearLayout>(R.id.note_buttons_mandolin)
                 index = noteButtons.indexOfChild(noteButtonsMandolin)
             }
 
             getString(R.string.button_tag_ukulele) -> {
-                val noteButtonsUkulele = findViewById<ConstraintLayout>(R.id.note_buttons_ukulele)
+                val noteButtonsUkulele = findViewById<LinearLayout>(R.id.note_buttons_ukulele)
                 index = noteButtons.indexOfChild(noteButtonsUkulele)
             }
         }

@@ -2,10 +2,10 @@
 <resources>
     <!-- As long as corner radius is bigger than the height and width it will be a circle, so use a really big radius -->
     <dimen name="button_corner_radius">1000dp</dimen>
-    <dimen name="button_margin">10dp</dimen>
-    <dimen name="instrument_button_height_percent">0.16</dimen>
-    <dimen name="instrument_icon_height_percent">0.1</dimen>
-    <dimen name="note_button_height_percent">0.12</dimen>
+    <dimen name="button_margin">5dp</dimen>
+    <dimen name="instrument_button_height_width">110dp</dimen>
+    <dimen name="instrument_button_icon_size">70dp</dimen>
+    <dimen name="note_button_height_width">84dp</dimen>
     <!-- We're intentionally using dp here, because sp would cause the font size to scale, which we don't want since we've maxed out the font size -->
     <dimen name="note_button_text_size">48dp</dimen>
 </resources>

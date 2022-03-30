@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!-- I think having a ConstraintLayout here will be fine, but if need be we can swap it out with a
-LinearLayout as below if it becomes too much of a pain to maintain, particularly in terms of
-maintaining changes here and in the landscape layout.
--->
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -26,20 +23,18 @@ maintaining changes here and in the landscape layout.
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Originally we'd used a nested ConstraintLayout inside instrument_buttons, but even though
-    the Android documentation recommends ConstraintLayout, it's much too rigid. It seems
-    ConstraintLayout is great for placing items in precise relation to other items, but it's overkill
-    here where we just want a linear arrangement. By using a LinearLayout, we can reuse
-    instrument_buttons as-is in the landscape layout by simply changing the orientation of the
-    LinearLayout. This also works for the note buttons below.
+    <!--
+     - android:gravity="center" + android:gravity="center" uses all of the available height and centers it horizontally
+       - This avoids subtle cutting off of the buttom edge of the last button
     -->
     <LinearLayout
         android:id="@+id/instrument_buttons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/note_buttons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/note_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar">
 
@@ -47,25 +42,26 @@ maintaining changes here and in the landscape layout.
     </LinearLayout>
 
     <!--
-    - android:layout_height="0dp" uses all of the available height, combined with android:gravity="center" (below) to center each item vertically
+    - android:layout_height="0dp" uses all of the available height, adn the items are automatically vertically centred
+    - android:layout_width="0dp" uses all of the available width, combined with android:gravity="center" (below) to center each item vertically
       - Otherwise, the height would be set to the height of the content of the first view flipper and the other items would float to the top
     -->
     <ViewFlipper
         android:id="@+id/note_buttons"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/instrument_buttons"
-        app:layout_constraintTop_toBottomOf="@id/appbar">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/instrument_buttons">
 
         <LinearLayout
             android:id="@+id/note_buttons_guitar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <include layout="@layout/note_buttons_guitar" />
         </LinearLayout>
@@ -75,7 +71,7 @@ maintaining changes here and in the landscape layout.
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <include layout="@layout/note_buttons_ukulele" />
         </LinearLayout>
@@ -85,7 +81,7 @@ maintaining changes here and in the landscape layout.
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <include layout="@layout/note_buttons_mandolin" />
         </LinearLayout>
@@ -95,7 +91,7 @@ maintaining changes here and in the landscape layout.
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <include layout="@layout/note_buttons_banjo" />
         </LinearLayout>

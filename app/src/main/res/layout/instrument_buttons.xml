@@ -1,125 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- android:stateListAnimator="@null" ensures that the button will always be under the ImageView -->
-    <Button
+    <!--
+    - android:insetTop, android:insetBottom, app:cornerRadius, are required for a circle button, along with android:layout_width and android:layout_height being set to the same values (https://stackoverflow.com/a/64432123/399105)
+    - com.google.android.material.button.MaterialButton, app:iconGravity and app:iconPadding are required to centre the icon in the button (https://stackoverflow.com/a/54713480/399105)
+    -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/instrument_button1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/instrument_button_height_width"
+        android:layout_height="@dimen/instrument_button_height_width"
+        android:layout_margin="@dimen/button_margin"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:onClick="changePitchPipeInstrument"
-        android:stateListAnimator="@null"
         android:tag="@string/button_tag_guitar"
         app:cornerRadius="@dimen/button_corner_radius"
-        app:layout_constraintBottom_toTopOf="@id/instrument_button2"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="@dimen/instrument_button_height_percent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:icon="@drawable/ic_guitar_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/instrument_button_icon_size" />
 
-    <!-- Use an ImageView on top of the Button because otherwise we have to hardcode the image size if we set it as a button icon -->
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_guitar_icon"
-        app:layout_constraintBottom_toBottomOf="@id/instrument_button1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="@dimen/instrument_icon_height_percent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/instrument_button1"
-        app:tint="@color/white" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/instrument_button2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/button_margin"
+        android:layout_width="@dimen/instrument_button_height_width"
+        android:layout_height="@dimen/instrument_button_height_width"
+        android:layout_margin="@dimen/button_margin"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:onClick="changePitchPipeInstrument"
-        android:stateListAnimator="@null"
         android:tag="@string/button_tag_ukulele"
         app:cornerRadius="@dimen/button_corner_radius"
-        app:layout_constraintBottom_toTopOf="@id/instrument_button3"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="@dimen/instrument_button_height_percent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instrument_button1" />
+        app:icon="@drawable/ic_ukulele_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/instrument_button_icon_size" />
 
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_ukulele_icon"
-        app:layout_constraintBottom_toBottomOf="@id/instrument_button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="@dimen/instrument_icon_height_percent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/instrument_button2"
-        app:tint="@color/white" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/instrument_button3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/button_margin"
+        android:layout_width="@dimen/instrument_button_height_width"
+        android:layout_height="@dimen/instrument_button_height_width"
+        android:layout_margin="@dimen/button_margin"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:onClick="changePitchPipeInstrument"
-        android:stateListAnimator="@null"
         android:tag="@string/button_tag_mandolin"
         app:cornerRadius="@dimen/button_corner_radius"
-        app:layout_constraintBottom_toTopOf="@id/instrument_button4"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="@dimen/instrument_button_height_percent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instrument_button2" />
+        app:icon="@drawable/ic_mandolin_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/instrument_button_icon_size" />
 
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_mandolin_icon"
-        app:layout_constraintBottom_toBottomOf="@id/instrument_button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="@dimen/instrument_icon_height_percent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/instrument_button3"
-        app:tint="@color/white" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/instrument_button4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/button_margin"
+        android:layout_width="@dimen/instrument_button_height_width"
+        android:layout_height="@dimen/instrument_button_height_width"
+        android:layout_margin="@dimen/button_margin"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:onClick="changePitchPipeInstrument"
-        android:stateListAnimator="@null"
         android:tag="@string/button_tag_banjo"
         app:cornerRadius="@dimen/button_corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="@dimen/instrument_button_height_percent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instrument_button3" />
-
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_banjo_icon"
-        app:layout_constraintBottom_toBottomOf="@id/instrument_button4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="@dimen/instrument_icon_height_percent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/instrument_button4"
-        app:tint="@color/white" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:icon="@drawable/ic_banjo_icon"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="@dimen/instrument_button_icon_size" />
+</merge>
