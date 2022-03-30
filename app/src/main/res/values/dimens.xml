@@ -6,4 +6,6 @@
     <dimen name="instrument_button_height_percent">0.16</dimen>
     <dimen name="instrument_icon_height_percent">0.1</dimen>
     <dimen name="note_button_height_percent">0.12</dimen>
+    <!-- We're intentionally using dp here, because sp would cause the font size to scale, which we don't want since we've maxed out the font size -->
+    <dimen name="note_button_text_size">48dp</dimen>
 </resources>
