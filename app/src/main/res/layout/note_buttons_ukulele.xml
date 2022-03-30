@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <Button
         android:id="@+id/button1"
@@ -14,7 +15,8 @@
         android:tag="67"
         android:text="@string/note_G"
         android:textSize="@dimen/note_button_text_size"
-        app:cornerRadius="@dimen/button_corner_radius" />
+        app:cornerRadius="@dimen/button_corner_radius"
+        tools:ignore="SpUsage" />
 
     <Button
         android:id="@+id/button2"
@@ -28,7 +30,8 @@
         android:tag="60"
         android:text="@string/note_C"
         android:textSize="@dimen/note_button_text_size"
-        app:cornerRadius="@dimen/button_corner_radius" />
+        app:cornerRadius="@dimen/button_corner_radius"
+        tools:ignore="SpUsage" />
 
     <Button
         android:id="@+id/button3"
@@ -42,7 +45,8 @@
         android:tag="64"
         android:text="@string/note_E"
         android:textSize="@dimen/note_button_text_size"
-        app:cornerRadius="@dimen/button_corner_radius" />
+        app:cornerRadius="@dimen/button_corner_radius"
+        tools:ignore="SpUsage" />
 
     <Button
         android:id="@+id/button4"
@@ -56,5 +60,6 @@
         android:tag="69"
         android:text="@string/note_A"
         android:textSize="@dimen/note_button_text_size"
-        app:cornerRadius="@dimen/button_corner_radius" />
+        app:cornerRadius="@dimen/button_corner_radius"
+        tools:ignore="SpUsage" />
 </merge>
