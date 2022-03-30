@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Diapason</string>
+    <string name="action_info">Info</string>
+
+    <string name="button_tag_banjo">Banjo à 5 cordes</string>
+    <string name="button_tag_guitar">Guitare</string>
+    <string name="button_tag_mandolin">Mandoline</string>
+    <string name="button_tag_ukulele">Ukulélé</string>
+
+    <string name="note_A">La</string>
+    <string name="note_B">Si</string>
+    <string name="note_C">Do</string>
+    <string name="note_D">Ré</string>
+    <string name="note_E">Mi</string>
+    <string name="note_F">Fa</string>
+    <string name="note_G">Sol</string>
+</resources>
