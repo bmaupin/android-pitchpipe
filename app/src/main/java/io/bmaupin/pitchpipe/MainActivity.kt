@@ -5,12 +5,12 @@ import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import cn.sherlock.com.sun.media.sound.SF2Soundbank
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer
 import com.google.android.material.snackbar.Snackbar
@@ -22,7 +22,7 @@ import kotlin.concurrent.schedule
 private const val NOTE_DURATION: Long = 5000
 private const val NOTE_VELOCITY = 127
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var stopNoteTimer: TimerTask? = null
 
     private var synth: SoftSynthesizer? = null
@@ -127,7 +127,27 @@ class MainActivity : AppCompatActivity() {
         noteButtons.displayedChild = index
     }
 
-    fun playPitchPipeNote(view: View) {
+    override fun onContentChanged() {
+        super.onContentChanged()
+
+        // Wire up the note buttons to the onClick listener to play the notes
+        val noteButtonViewFlipper = findViewById<View>(R.id.note_buttons) as ViewFlipper
+        val touchables = noteButtonViewFlipper.touchables
+
+        for (view in touchables) {
+            if (view is Button) {
+                view.setOnClickListener(this)
+            }
+        }
+    }
+
+    override fun onClick(view: View?) {
+        if (view != null) {
+            playPitchPipeNote(view)
+        }
+    }
+
+    private fun playPitchPipeNote(view: View) {
         // Stop all previous notes
         stopAllMidiNotes()
 
