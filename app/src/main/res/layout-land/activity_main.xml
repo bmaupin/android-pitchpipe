@@ -24,13 +24,17 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <!--
-     - android:gravity="center" + android:gravity="center" uses all of the available height and centers it horizontally
-       - This avoids subtle cutting off of the buttom edge of the last button
+    - android:gravity="center" + android:gravity="center" uses all of the available height and centers it horizontally
+      - This avoids subtle cutting off of the buttom edge of the last button
+    - android:layout_height="wrap_content" allows the spacing to the top and bottom of each group to
+      be the same; if we instead use android:layout_height="0dp", it will use half the space for
+      each group and the spacing between both button groups will be roughly double the spacing
+      between each group and the edges
     -->
     <LinearLayout
         android:id="@+id/instrument_buttons"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/note_buttons"
@@ -49,7 +53,7 @@
     <ViewFlipper
         android:id="@+id/note_buttons"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

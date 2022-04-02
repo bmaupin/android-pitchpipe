@@ -36,6 +36,10 @@ between the two groups of buttons would actually be double, which doesn't look a
     -->
     <!--
     - android:layout_height="0dp" uses all of the available height, combined with android:gravity="center" to center it vertically
+    - android:layout_height="wrap_content" allows the spacing to the left and right of each group to
+      be the same; if we instead use android:layout_height="match_parent", it will use half the
+      screen space for each group and the spacing between the button groups will be roughly double
+      the spacing between each group and the edge of the screen
     -->
     <LinearLayout
         android:id="@+id/instrument_buttons"
