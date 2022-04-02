@@ -32,6 +32,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        // Restore the group of displayed note buttons if the screen orientation is changed (https://stackoverflow.com/a/7118495/399105)
+        if (savedInstanceState != null) {
+            val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
+            val flipperPosition = savedInstanceState.getInt("NOTE_BUTTONS_DISPLAYED_INDEX")
+            noteButtons.displayedChild = flipperPosition
+            noteButtons.visibility = View.VISIBLE
+        }
+
         try {
             synth = SoftSynthesizer()
             synth!!.open()
@@ -52,6 +60,15 @@ class MainActivity : AppCompatActivity() {
                 .show()
             e.printStackTrace()
         }
+    }
+
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+
+        // Save which group of note buttons that is being displayed when the screen orientation is changed (https://stackoverflow.com/a/7118495/399105)
+        val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
+        val position: Int = noteButtons.displayedChild
+        savedInstanceState.putInt("NOTE_BUTTONS_DISPLAYED_INDEX", position)
     }
 
     override fun onPause() {
