@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!-- I think having a ConstraintLayout here will be fine, but if need be we can swap it out with a
-LinearLayout as below if it becomes too much of a pain to maintain, particularly in terms of
-maintaining changes here and in the landscape layout.
+<?xml version="1.0" encoding="utf-8"?><!-- In this case, ConstraintLayout is preferable to
+LinearLayout, because puts an even amount of space around either side of the instrument buttons
+and note buttons. With a LinearLayout with each set of buttons taking half the view, the spacing
+between the two groups of buttons would actually be double, which doesn't look as nice.
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,10 +34,14 @@ maintaining changes here and in the landscape layout.
     instrument_buttons as-is in the landscape layout by simply changing the orientation of the
     LinearLayout. This also works for the note buttons below.
     -->
+    <!--
+    - android:layout_height="0dp" uses all of the available height, combined with android:gravity="center" to center it vertically
+    -->
     <LinearLayout
         android:id="@+id/instrument_buttons"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/note_buttons"
@@ -46,10 +51,9 @@ maintaining changes here and in the landscape layout.
         <include layout="@layout/instrument_buttons" />
     </LinearLayout>
 
-    <!--
-    - android:layout_height="0dp" uses all of the available height, combined with android:gravity="center" (below) to center each item vertically
-      - Otherwise, the height would be set to the height of the content of the first view flipper and the other items would float to the top
-    -->
+    <!-- This uses the same trick as above (android:layout_height="0dp"/android:gravity="center")
+    but in this case, android:gravity="center" needs to be on the LinearLayout children in order to
+    work. -->
     <ViewFlipper
         android:id="@+id/note_buttons"
         android:layout_width="wrap_content"
@@ -100,5 +104,4 @@ maintaining changes here and in the landscape layout.
             <include layout="@layout/note_buttons_banjo" />
         </LinearLayout>
     </ViewFlipper>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
