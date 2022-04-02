@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import cn.sherlock.com.sun.media.sound.SF2Soundbank
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer
 import com.google.android.material.snackbar.Snackbar
@@ -75,14 +74,14 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_info -> {
-                val builder: AlertDialog.Builder? = AlertDialog.Builder(this)
-                builder?.setMessage(R.string.dialog_about_content)
-                val dialog: AlertDialog? = builder?.create()
-                dialog?.show()
+                val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+                builder.setMessage(R.string.dialog_about_content)
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
 
                 // Make the HTML links in the dialog clickable. Must be called after show()
                 // (https://stackoverflow.com/a/3367392/399105)
-                (dialog?.findViewById<TextView>(android.R.id.message)!!).movementMethod =
+                (dialog.findViewById<TextView>(android.R.id.message)!!).movementMethod =
                     LinkMovementMethod.getInstance()
 
                 true
@@ -92,18 +91,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun changePitchPipeInstrument(view: View) {
-        Snackbar.make(view, view.tag.toString(), Snackbar.LENGTH_SHORT)
-            .show()
-
         stopAllMidiNotes()
 
         val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
 
         // The note buttons are invisible when the app first starts; make them visible when an instrument is selected
-        noteButtons.visibility = View.VISIBLE;
+        noteButtons.visibility = View.VISIBLE
 
         var index = 0
-        when (view.tag.toString()) {
+        when (view.tooltipText.toString()) {
             getString(R.string.button_tag_banjo) -> {
                 val noteButtonsBanjo = findViewById<LinearLayout>(R.id.note_buttons_banjo)
                 index = noteButtons.indexOfChild(noteButtonsBanjo)
