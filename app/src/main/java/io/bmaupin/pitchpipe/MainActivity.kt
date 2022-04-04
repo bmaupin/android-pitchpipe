@@ -35,9 +35,11 @@ class MainActivity : AppCompatActivity() {
         // Restore the group of displayed note buttons if the screen orientation is changed (https://stackoverflow.com/a/7118495/399105)
         if (savedInstanceState != null) {
             val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
-            val flipperPosition = savedInstanceState.getInt("NOTE_BUTTONS_DISPLAYED_INDEX")
-            noteButtons.displayedChild = flipperPosition
-            noteButtons.visibility = View.VISIBLE
+            val noteButtonsDisplayedIndex =
+                savedInstanceState.getInt("NOTE_BUTTONS_DISPLAYED_INDEX")
+            noteButtons.displayedChild = noteButtonsDisplayedIndex
+            val noteButtonsVisibility = savedInstanceState.getInt("NOTE_BUTTONS_VISIBILITY")
+            noteButtons.visibility = noteButtonsVisibility
         }
 
         try {
@@ -67,8 +69,11 @@ class MainActivity : AppCompatActivity() {
 
         // Save which group of note buttons that is being displayed when the screen orientation is changed (https://stackoverflow.com/a/7118495/399105)
         val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
-        val position: Int = noteButtons.displayedChild
-        savedInstanceState.putInt("NOTE_BUTTONS_DISPLAYED_INDEX", position)
+        val noteButtonsDisplayedIndex: Int = noteButtons.displayedChild
+        savedInstanceState.putInt("NOTE_BUTTONS_DISPLAYED_INDEX", noteButtonsDisplayedIndex)
+        // We also need to save the visibility state
+        val noteButtonsVisibility: Int = noteButtons.visibility
+        savedInstanceState.putInt("NOTE_BUTTONS_VISIBILITY", noteButtonsVisibility)
     }
 
     override fun onPause() {
