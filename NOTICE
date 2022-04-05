@@ -1,8 +1,8 @@
 The following files are from or contain content from external sources:
 
-app/src/main/assets/FluidR3_GM.sf2
-Source: https://packages.debian.org/search?keywords=fluid-soundfont-gm
-License: MIT
+app/src/main/assets/GeneralUser GS v1.471.sf2
+Source: http://schristiancollins.com/generaluser.php
+License: GeneralUser GS License v2.0 (app/src/main/assets/LICENSE.txt)
 
 app/src/main/res/drawable/ic_banjo_icon.xml
 Source: https://thenounproject.com/icon/banjo-1352765/
