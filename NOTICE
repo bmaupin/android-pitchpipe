@@ -4,6 +4,22 @@ app/src/main/assets/FluidR3_GM.sf2
 Source: https://packages.debian.org/search?keywords=fluid-soundfont-gm
 License: MIT
 
+app/src/main/res/drawable/ic_banjo_icon.xml
+Source: https://thenounproject.com/icon/banjo-1352765/
+License: Creative Commons CC BY 3.0
+
+app/src/main/res/drawable/ic_guitar_icon.xml
+Source: https://thenounproject.com/icon/guitar-1352777/
+License: Creative Commons CC BY 3.0
+
+app/src/main/res/drawable/ic_mandolin_icon.xml
+Source: https://thenounproject.com/icon/mandolin-1352775/
+License: Creative Commons CC BY 3.0
+
+app/src/main/res/drawable/ic_ukulele_icon.xml
+Source: https://thenounproject.com/icon/ukelele-1352787/
+License: Creative Commons CC BY 3.0
+
 sherlockmidi/
-Source: https://github.com/Antor/MidiDriver
+Source: https://github.com/bmaupin/MidiDriver
 License: Apache 2.0, GPL 2.0 with classpath exception
