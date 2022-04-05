@@ -7,7 +7,7 @@
     <string name="button_tag_mandolin">Mandolin</string>
     <string name="button_tag_ukulele">Ukulele</string>
 
-    <string name="dialog_about_content">Long-press instrument buttons to see what they are.\n\nSource code for this application available here: <a href="https://github.com/bmaupin/android-pitchpipe">https://github.com/bmaupin/android-pitchpipe</a>\n\nInstrument icons are from the <a href="https://thenounproject.com/thepyramidschool/">The Pyramid School</a> and licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons CC BY 3.0</a></string>
+    <string name="dialog_about_content">(Android 8+) Long-press instrument buttons to see their names.\n\nSource code for this application available here: <a href="https://github.com/bmaupin/android-pitchpipe">https://github.com/bmaupin/android-pitchpipe</a>\n\nInstrument icons are from the <a href="https://thenounproject.com/thepyramidschool/">The Pyramid School</a> and licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons CC BY 3.0</a></string>
 
     <!-- See here for translations: https://en.wikipedia.org/wiki/Key_signature_names_and_translations -->
     <string name="note_A">A</string>

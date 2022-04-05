@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         noteButtons.visibility = View.VISIBLE
 
         var index = 0
-        when (view.tooltipText.toString()) {
+        when (view.tag.toString()) {
             getString(R.string.button_tag_banjo) -> {
                 val noteButtonsBanjo = findViewById<LinearLayout>(R.id.note_buttons_banjo)
                 index = noteButtons.indexOfChild(noteButtonsBanjo)
