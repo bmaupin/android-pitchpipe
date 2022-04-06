@@ -8,7 +8,8 @@ android {
 
     defaultConfig {
         applicationId "io.bmaupin.pitchpipe"
-        // Use the lowest minSdkVersion possible; SDK 15 is Android 4.0
+        // Use the lowest minSdkVersion possible; SDK 15 is Android 4.0.3
+        // In practice, anything under SDK 21 throws this error when the app tries to open: java.lang.IllegalArgumentException: bitmap size exceeds 32bits
         // For more details, in Android Studio go to File > New > New Project > Next > Help me choose
         minSdkVersion 15
         targetSdkVersion 30
