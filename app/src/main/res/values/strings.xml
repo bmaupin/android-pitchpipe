@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Instrument pitch pipe</string>
+    <string name="app_name">Pitch pipe</string>
     <string name="action_info">Info</string>
 
     <string name="button_tag_banjo">5-string banjo</string>
