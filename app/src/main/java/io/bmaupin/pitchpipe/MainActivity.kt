@@ -1,5 +1,6 @@
 package io.bmaupin.pitchpipe
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.Menu
@@ -41,13 +42,23 @@ class MainActivity : AppCompatActivity() {
         // Dynamically set instrument button size
         instrumentButtons.doOnLayout {
             for (instrumentButton in instrumentButtons.children) {
-                // TODO: for landscape, we want to start with the width!
-                // Start with the height of the parent layout
-                val newHeight = ((instrumentButtons.height -
-                        // Subtract 10% top/bottom margin
-                        (instrumentButtons.height * 0.1 * 2)) /
-                        // Divide by number of buttons
-                        instrumentButtons.childCount).toInt()
+                // Use a slightly different calculation depending on the screen orientation
+                val newHeight =
+                    if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        // Start with the height of the parent layout
+                        ((instrumentButtons.height -
+                                // Subtract 10% top/bottom margin
+                                (instrumentButtons.height * 0.1 * 2)) /
+                                // Divide by number of buttons
+                                instrumentButtons.childCount).toInt()
+                    } else {
+                        // Start with the width of the parent layout
+                        ((instrumentButtons.width -
+                                // Use a slightly bigger margin
+                                (instrumentButtons.width * 0.15 * 2)) /
+                                // Divide by number of buttons
+                                instrumentButtons.childCount).toInt()
+                    }
 
                 instrumentButton.updateLayoutParams {
                     height = newHeight
