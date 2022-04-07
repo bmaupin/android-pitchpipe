@@ -15,6 +15,7 @@ import androidx.core.view.doOnLayout
 import androidx.core.view.updateLayoutParams
 import cn.sherlock.com.sun.media.sound.SF2Soundbank
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import jp.kshoji.javax.sound.midi.Receiver
 import jp.kshoji.javax.sound.midi.ShortMessage
@@ -51,7 +52,10 @@ class MainActivity : AppCompatActivity() {
                 instrumentButton.updateLayoutParams {
                     height = newHeight
                     width = newHeight
-                    // TODO: set icon size
+                }
+
+                if (instrumentButton is MaterialButton) {
+                    instrumentButton.iconSize = (newHeight * 0.6).toInt()
                 }
             }
         }
