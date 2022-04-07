@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Text size needs to be smaller for languages that use solfege-based systems so they'll fit on the button -->
-    <dimen name="note_button_text_size">30dp</dimen>
+    <dimen name="note_button_text_size">0dp</dimen>
+    <item name="note_button_text_size_percentage" format="float" type="dimen">0.35</item>
 </resources>

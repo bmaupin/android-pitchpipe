@@ -1,17 +1,24 @@
 package io.bmaupin.pitchpipe
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
+import androidx.core.view.doOnLayout
+import androidx.core.view.updateLayoutParams
 import cn.sherlock.com.sun.media.sound.SF2Soundbank
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import jp.kshoji.javax.sound.midi.Receiver
 import jp.kshoji.javax.sound.midi.ShortMessage
@@ -32,14 +39,89 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        // Dynamically set instrument button size
+        val instrumentButtons = findViewById<LinearLayout>(R.id.instrument_buttons)
+        instrumentButtons.doOnLayout {
+            // Use a slightly different calculation depending on the screen orientation
+            val newHeight =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    // Start with the height of the parent layout
+                    ((instrumentButtons.height -
+                            // Subtract 10% top/bottom margin
+                            (instrumentButtons.height * 0.1 * 2)) /
+                            // Divide by number of buttons
+                            instrumentButtons.childCount).toInt()
+                } else {
+                    // Start with the width of the parent layout
+                    ((instrumentButtons.width -
+                            // Use a slightly bigger margin
+                            (instrumentButtons.width * 0.15 * 2)) /
+                            // Divide by number of buttons
+                            instrumentButtons.childCount).toInt()
+                }
+
+            for (instrumentButton in instrumentButtons.children) {
+                instrumentButton.updateLayoutParams {
+                    height = newHeight
+                    width = newHeight
+                }
+
+                if (instrumentButton is MaterialButton) {
+                    instrumentButton.iconSize = (newHeight * 0.6).toInt()
+                }
+            }
+        }
+
+        // Dynamically set note button size
+        val noteButtonsViewFlipper = findViewById<ViewFlipper>(R.id.note_buttons)
+        noteButtonsViewFlipper.doOnLayout {
+            // Get the height to use by taking the measurements from the guitar note buttons, because it has the most buttons
+            val guitarNoteButtons = findViewById<LinearLayout>(R.id.note_buttons_guitar)
+
+            // Yikes (https://stackoverflow.com/a/8780360/399105)
+            val outValue = TypedValue()
+            resources.getValue(R.dimen.note_button_text_size_percentage, outValue, true)
+            val noteButtonTextSizePercentage = outValue.float
+
+            // This is more or less copied from the instrument buttons, above
+            val newHeight =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    ((guitarNoteButtons.height -
+                            (guitarNoteButtons.height * 0.1 * 2)) /
+                            guitarNoteButtons.childCount).toInt()
+                } else {
+                    ((guitarNoteButtons.width -
+                            (guitarNoteButtons.width * 0.15 * 2)) /
+                            guitarNoteButtons.childCount).toInt()
+                }
+
+            // Now apply the height to all of the note buttons
+            for (noteButtonsLayout in noteButtonsViewFlipper.children) {
+                if (noteButtonsLayout is LinearLayout) {
+                    for (noteButton in noteButtonsLayout.children) {
+                        noteButton.updateLayoutParams {
+                            height = newHeight
+                            width = newHeight
+                        }
+
+                        if (noteButton is Button) {
+                            noteButton.setTextSize(
+                                TypedValue.COMPLEX_UNIT_PX,
+                                newHeight * noteButtonTextSizePercentage
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
         // Restore the group of displayed note buttons if the screen orientation is changed (https://stackoverflow.com/a/7118495/399105)
         if (savedInstanceState != null) {
-            val noteButtons = findViewById<ViewFlipper>(R.id.note_buttons)
             val noteButtonsDisplayedIndex =
                 savedInstanceState.getInt("NOTE_BUTTONS_DISPLAYED_INDEX")
-            noteButtons.displayedChild = noteButtonsDisplayedIndex
+            noteButtonsViewFlipper.displayedChild = noteButtonsDisplayedIndex
             val noteButtonsVisibility = savedInstanceState.getInt("NOTE_BUTTONS_VISIBILITY")
-            noteButtons.visibility = noteButtonsVisibility
+            noteButtonsViewFlipper.visibility = noteButtonsVisibility
         }
 
         try {
