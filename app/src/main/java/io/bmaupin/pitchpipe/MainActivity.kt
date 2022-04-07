@@ -10,6 +10,9 @@ import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
+import androidx.core.view.doOnLayout
+import androidx.core.view.updateLayoutParams
 import cn.sherlock.com.sun.media.sound.SF2Soundbank
 import cn.sherlock.com.sun.media.sound.SoftSynthesizer
 import com.google.android.material.snackbar.Snackbar
@@ -31,6 +34,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        val instrumentButtons = findViewById<LinearLayout>(R.id.instrument_buttons)
+
+        // Dynamically set instrument button size
+        instrumentButtons.doOnLayout {
+            for (instrumentButton in instrumentButtons.children) {
+                // TODO: for landscape, we want to start with the width!
+                // Start with the height of the parent layout
+                val newHeight = ((instrumentButtons.height -
+                        // Subtract 10% top/bottom margin
+                        (instrumentButtons.height * 0.1 * 2)) /
+                        // Divide by number of buttons
+                        instrumentButtons.childCount).toInt()
+
+                instrumentButton.updateLayoutParams {
+                    height = newHeight
+                    width = newHeight
+                    // TODO: set icon size
+                }
+            }
+        }
+
+        // TODO: set note button size
 
         // Restore the group of displayed note buttons if the screen orientation is changed (https://stackoverflow.com/a/7118495/399105)
         if (savedInstanceState != null) {
