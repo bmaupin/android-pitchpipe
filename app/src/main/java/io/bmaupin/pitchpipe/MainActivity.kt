@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 import androidx.core.view.doOnLayout
 import androidx.core.view.updateLayoutParams
@@ -43,22 +44,35 @@ class MainActivity : AppCompatActivity() {
         val instrumentButtons = findViewById<LinearLayout>(R.id.instrument_buttons)
         instrumentButtons.doOnLayout {
             // Use a slightly different calculation depending on the screen orientation
-            val newHeight =
-                if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    // Start with the height of the parent layout
-                    ((instrumentButtons.height -
-                            // Subtract 10% top/bottom margin
-                            (instrumentButtons.height * 0.1 * 2)) /
-                            // Divide by number of buttons
-                            instrumentButtons.childCount).toInt()
-                } else {
-                    // Start with the width of the parent layout
-                    ((instrumentButtons.width -
-                            // Use a slightly bigger margin
-                            (instrumentButtons.width * 0.15 * 2)) /
-                            // Divide by number of buttons
-                            instrumentButtons.childCount).toInt()
+            var newHeight = 0;
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                // Start with the height of the parent layout
+                newHeight = ((instrumentButtons.height -
+                        // Subtract 10% top/bottom margin
+                        (instrumentButtons.height * 0.1 * 2)) /
+                        // Divide by number of buttons
+                        instrumentButtons.childCount).toInt()
+
+                // Cap the size so the buttons don't get too big on tall screens
+                val maxHeight =
+                    ((instrumentButtons.parent as ConstraintLayout).width * 0.30).toInt();
+                if (newHeight > maxHeight) {
+                    newHeight = maxHeight
                 }
+            } else {
+                // Start with the width of the parent layout
+                newHeight = ((instrumentButtons.width -
+                        // Use a slightly bigger margin
+                        (instrumentButtons.width * 0.15 * 2)) /
+                        // Divide by number of buttons
+                        instrumentButtons.childCount).toInt()
+
+                val maxHeight =
+                    ((instrumentButtons.parent as ConstraintLayout).height * 0.30).toInt();
+                if (newHeight > maxHeight) {
+                    newHeight = maxHeight
+                }
+            }
 
             for (instrumentButton in instrumentButtons.children) {
                 instrumentButton.updateLayoutParams {
