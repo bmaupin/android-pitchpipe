@@ -1,2 +1,2 @@
-include ':sherlockmidi', ':app'
-rootProject.name = "Instrument pitch pipe"
+include ':app'
+rootProject.name = "Pitch pipe"
