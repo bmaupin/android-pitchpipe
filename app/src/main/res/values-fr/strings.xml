@@ -7,6 +7,9 @@
     <string name="button_tag_mandolin">Mandoline</string>
     <string name="button_tag_ukulele">Ukulélé</string>
 
+    <!-- TODO: translate -->
+    <string name="dialog_about_content">(Android 8+) Long-press instrument buttons to see their names.\n\nSource code for this application available here: <a href="https://github.com/bmaupin/android-pitchpipe">https://github.com/bmaupin/android-pitchpipe</a>\n\nInstrument icons are from the <a href="https://thenounproject.com/thepyramidschool/">The Pyramid School</a> and licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons CC BY 3.0</a>\n\nSound font is <a href="http://schristiancollins.com/generaluser.php">GeneralUser GS by S. Christian Collins</a>, licensed under GeneralUser GS License v2.0</string>
+
     <string name="note_A">La</string>
     <string name="note_B">Si</string>
     <string name="note_C">Do</string>
