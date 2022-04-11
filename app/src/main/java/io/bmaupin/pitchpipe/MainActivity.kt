@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val instrumentButtons = findViewById<LinearLayout>(R.id.instrument_buttons)
         instrumentButtons.doOnLayout {
             // Use a slightly different calculation depending on the screen orientation
-            var newHeight = 0;
+            var newHeight = 0
             if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                 // Start with the height of the parent layout
                 newHeight = ((instrumentButtons.height -
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
                 // Cap the size so the buttons don't get too big on tall screens
                 val maxHeight =
-                    ((instrumentButtons.parent as ConstraintLayout).width * 0.30).toInt();
+                    ((instrumentButtons.parent as ConstraintLayout).width * 0.30).toInt()
                 if (newHeight > maxHeight) {
                     newHeight = maxHeight
                 }
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                         instrumentButtons.childCount).toInt()
 
                 val maxHeight =
-                    ((instrumentButtons.parent as ConstraintLayout).height * 0.30).toInt();
+                    ((instrumentButtons.parent as ConstraintLayout).height * 0.30).toInt()
                 if (newHeight > maxHeight) {
                     newHeight = maxHeight
                 }
@@ -100,12 +100,12 @@ class MainActivity : AppCompatActivity() {
             // This is more or less copied from the instrument buttons, above
             val newHeight =
                 if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    ((guitarNoteButtons.height -
-                            (guitarNoteButtons.height * 0.1 * 2)) /
+                    ((noteButtonsViewFlipper.height -
+                            (noteButtonsViewFlipper.height * 0.1 * 2)) /
                             guitarNoteButtons.childCount).toInt()
                 } else {
-                    ((guitarNoteButtons.width -
-                            (guitarNoteButtons.width * 0.15 * 2)) /
+                    ((noteButtonsViewFlipper.width -
+                            (noteButtonsViewFlipper.width * 0.15 * 2)) /
                             guitarNoteButtons.childCount).toInt()
                 }
 
