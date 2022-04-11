@@ -74,9 +74,35 @@
 
       _File_ > _Document Properties_ > _Page_ > _Background_ > check _Checkerboard background_
 
-   1. Change the fill colour to white
+   1. Set the fill colour
 
-      Select everything in the document, right-click > _Fill and Stroke_ > _Stroke paint_ > RGBA: `ffffffff`
+      Select everything in the document (Ctrl+A), right-click > _Fill and Stroke_ > _Stroke paint_ > _RGBA_ > `ffffffff` (or whatever colour you want to set it to)
+
+   1. (Optional) Fill in the icon
+
+      1. Make sure the paths for every area you want to fill are enclosed (they should form a loop with no loose ends)
+
+         **Note:** It isn't completely necessary to have each path fully enclosed. Sometimes having it mostly enclosed may be enough
+
+         1. In the left menu, select _Edit paths by nodes_
+
+         1. Shift-click all paths that aren't enclosed that you would like to join
+
+         1. _Path_ > _Combine_
+
+         1. If this creates gaps in the outline, select the joined path > right-click > _Fill and Stroke_ > _Stroke style_ > and choose a different _Cap_ (like the second one) to fill the gaps
+
+         1. If the path is still open because one or more sides don't have paths (e.g. you have a rectangle with 3 sides but the 4th side doesn't have a path, so it's open on that side)
+
+            1. Click the path to select it
+
+            1. Shift-click the actual nodes in the path where a new segment needs to be created
+
+            1. Click _Join selected endnodes with a new segment_
+
+      1. Click to select a path that's completely enclosed
+
+      1. Right-click > _Fill and Stroke_ > _Fill_ > select _Flat color_ (the second box) and set the colour in _RGBA_
 
 1. Add a shadow
 
