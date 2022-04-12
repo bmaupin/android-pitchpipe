@@ -14,7 +14,6 @@
         android:onClick="playPitchPipeNote"
         android:tag="67"
         android:text="@string/note_G"
-        android:textSize="@dimen/note_button_text_size"
         app:cornerRadius="@dimen/button_corner_radius"
         tools:ignore="SpUsage" />
 
@@ -29,7 +28,6 @@
         android:onClick="playPitchPipeNote"
         android:tag="50"
         android:text="@string/note_D"
-        android:textSize="@dimen/note_button_text_size"
         app:cornerRadius="@dimen/button_corner_radius"
         tools:ignore="SpUsage" />
 
@@ -44,7 +42,6 @@
         android:onClick="playPitchPipeNote"
         android:tag="55"
         android:text="@string/note_G"
-        android:textSize="@dimen/note_button_text_size"
         app:cornerRadius="@dimen/button_corner_radius"
         tools:ignore="SpUsage" />
 
@@ -59,7 +56,6 @@
         android:onClick="playPitchPipeNote"
         android:tag="59"
         android:text="@string/note_B"
-        android:textSize="@dimen/note_button_text_size"
         app:cornerRadius="@dimen/button_corner_radius"
         tools:ignore="SpUsage" />
 
@@ -74,7 +70,6 @@
         android:onClick="playPitchPipeNote"
         android:tag="62"
         android:text="@string/note_D"
-        android:textSize="@dimen/note_button_text_size"
         app:cornerRadius="@dimen/button_corner_radius"
         tools:ignore="SpUsage" />
 </merge>

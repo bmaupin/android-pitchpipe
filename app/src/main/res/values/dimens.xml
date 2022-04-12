@@ -3,10 +3,10 @@
     <!-- As long as corner radius is bigger than the height and width it will be a circle, so use a really big radius -->
     <dimen name="button_corner_radius">1000dp</dimen>
     <dimen name="button_margin">5dp</dimen>
-    <dimen name="instrument_button_height_width">0dp</dimen>
-    <dimen name="instrument_button_icon_size">0dp</dimen>
-    <dimen name="note_button_height_width">0dp</dimen>
-    <!-- We're intentionally using dp here, because sp would cause the font size to scale, which we don't want since we've maxed out the font size -->
-    <dimen name="note_button_text_size">0dp</dimen>
+    <!-- We're dynamically sizing the note button height/width in the code, but for some reason
+         setting the initial height/width to 0dp makes it so that the text is no longer centred
+         after the screen orientation changes. Setting the initial height/width to a large value
+         seems to fix this -->
+    <dimen name="note_button_height_width">1000dp</dimen>
     <item name="note_button_text_size_percentage" format="float" type="dimen">0.57</item>
 </resources>
