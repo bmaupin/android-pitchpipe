@@ -1,6 +1,6 @@
 # Source: https://github.com/actions/starter-workflows/blob/main/ci/android.yml
 
-name: Android CI
+name: CI
 
 on:
   push:
