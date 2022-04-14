@@ -5,4 +5,4 @@
 
 Simple instrument [pitch pipe](https://en.m.wikipedia.org/wiki/Pitch_pipe) for Android
 
-<img alt="app icon" src="media/screenshot.png" width="300"/>
+<img alt="screenshot" src="metadata/en-US/images/phoneScreenshots/1.png" width="300"/>
