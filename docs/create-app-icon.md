@@ -1,3 +1,5 @@
+#### Create app icon
+
 1. Create an SVG
 
    1. Install Inkscape
@@ -160,3 +162,45 @@
    [https://developer.android.com/studio/write/image-asset-studio](https://developer.android.com/studio/write/image-asset-studio)
 
    Use an appropriate zoom level, e.g. 40%
+
+#### Create feature graphic (for app stores) from app icon
+
+1. Open app icon in Inkscape
+
+1. Set a background colour
+
+   1. _File_ > _Document Properties_ > _Background_
+
+   1. Uncheck _Checkerboard background_
+
+   1. Click the box to the right of _Background color_
+
+   1. Set a colour and make sure the alpha (`A`) is 255 (or make sure the last 2 digits of `RGBA` is `ff`), e.g. `03dac5ff`
+
+1. Export the image to a PNG
+
+   1. _File_ > _Export PNG Image_
+
+   1. Under _Export area_ click _Page_
+
+   1. Set the values under _Export_ area as follows
+
+      1. _y0_: Set to `-50`
+
+         TODO: maybe it would be better to set these based on a percentage of _y1_?
+
+      1. _y1_: Start with the current value of _y1_, add `50`, e.g. if _y1_ is `453`:
+
+         453 + 50 = 503
+
+      1. _x0_: Start with the value of _Height_, multiply it by `1024` and divide by `500`. Then divide that by `2` and subtract it from the current value of _x1_, e.g. if the value of _Height_ is `553` and the current value of _x1_ is `425`:
+
+         (425 - (553 \* 1024 / 500)) / 2 = -353.772
+
+      1. _x1_: Make the new value of _x0_ positive and add it to the current value of _x1_, e.g. if the new value of _x0_ is `-353.772` and the current value of _x1_ is `425`:
+
+         353.772 + 425 = 778.772
+
+   1. Under _Image size_ set _Width_ to `1024` and make sure _Height_ is `500`. If _Height_ isn't `500`, a mistake was made in the previous section
+
+   1. Click _Export_
