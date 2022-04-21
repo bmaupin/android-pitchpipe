@@ -16,10 +16,6 @@ buildscript {
 
 allprojects {
     repositories {
-        maven {
-            url 'https://github.com/kshoji/javax.sound.midi-for-Android/raw/master/javax.sound.midi/repository'
-        }
-        maven { url 'https://github.com/bmaupin/MidiDriver/raw/master/repo' }
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }
