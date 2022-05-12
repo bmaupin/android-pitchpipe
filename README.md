@@ -10,3 +10,8 @@ Simple instrument [pitch pipe](https://en.m.wikipedia.org/wiki/Pitch_pipe) for A
      height="80">](https://f-droid.org/packages/io.bmaupin.pitchpipe/)
 
 <img alt="screenshot" src="metadata/en-US/images/phoneScreenshots/1.png" width="300"/>
+
+Built using:
+
+- [KyoSherlock/MidiDriver](https://github.com/bmaupin/MidiDriver)
+- [kshoji/javax.sound.midi-for-Android](https://github.com/kshoji/javax.sound.midi-for-Android)
