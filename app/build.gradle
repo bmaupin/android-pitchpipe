@@ -13,8 +13,8 @@ android {
         // For more details, in Android Studio go to File > New > New Project > Next > Help me choose
         minSdkVersion 15
         targetSdkVersion 30
-        versionCode 6
-        versionName "0.5.1"
+        versionCode 7
+        versionName "0.5.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
