@@ -161,7 +161,20 @@
 
    [https://developer.android.com/studio/write/image-asset-studio](https://developer.android.com/studio/write/image-asset-studio)
 
-   Use an appropriate zoom level, e.g. 40%
+   1. _File_ > _New_ > _Image Asset_
+
+      - _Foreground Layer_
+
+        1. Browse to media/app-icon.svg
+        1. Use an appropriate zoom level, e.g. 40%
+
+      - _Background Layer_
+
+        1. _Color_ > `03DAC5`
+
+   1. _Next_
+   1. _Res Directory_ > _main_
+   1. _Finish_
 
 #### Create feature graphic (for app stores) from app icon
 
@@ -203,4 +216,19 @@
 
    1. Under _Image size_ set _Width_ to `1024` and make sure _Height_ is `500`. If _Height_ isn't `500`, a mistake was made in the previous section
 
-   1. Click _Export_
+   1. Click _Export As_ > browse to `metadata/en-US/images/featureGraphic.png`
+
+#### Modify app icon
+
+1. Open app icon ([../media/app-icon.svg](../media/app-icon.svg)) in Inkscape
+
+1. Re-create the app icon (see _Create the app icon_ above)
+
+   ⚠ Make sure the app/src/main/res/mipmap-\* files get replaced and not deleted. If they're deleted, repeat the steps to re-create the app icon. Otherwise, the build will fail with an error such as:
+
+   ```
+   > Android resource linking failed
+     /home/runner/work/android-pitchpipe/android-pitchpipe/app/build/intermediates/packaged_manifests/debug/AndroidManifest.xml:11: error: resource mipmap/ic_launcher (aka io.bmaupin.pitchpipe:mipmap/ic_launcher) not found.
+   ```
+
+1. Re-create the feature graphic (see above)
