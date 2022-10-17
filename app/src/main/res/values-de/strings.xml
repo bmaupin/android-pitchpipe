@@ -1,0 +1,23 @@
+<!-- Source: https://github.com/bmaupin/android-pitchpipe/issues/8#issuecomment-1247190340 -->
+<resources>
+    <!-- Wikipedia suggests "Stimmpfeife" (https://de.wikipedia.org/wiki/Stimmpfeife) -->
+    <string name="app_name">Pitch pipe</string>
+    <string name="action_info">Info</string>
+
+    <string name="button_tag_banjo">5-Saiten Banjo</string>
+    <string name="button_tag_guitar">Gitarre</string>
+    <string name="button_tag_mandolin">Mandoline</string>
+    <string name="button_tag_ukulele">Ukulele</string>
+
+    <string name="dialog_about_content">(Android 8+) Drücken Sie die Instrumententasten lange, um ihre Namen anzuzeigen.\n\nQuellcode für diese Anwendung ist hier verfügbar:: <a href=" https://github.com/bmaupin/android-pitchpipe"> https://github.com/bmaupin/android-pitchpipe</a>\n\nInstrumentensymbole stammen von <a href="https://thenounproject.com/thepyramidschool/">The Pyramid School</a> und sind lizensiert unter <a href=" http://creativecommons.org/licenses/by/3.0/">Creative Commons CC BY 3.0</a>\n\nDie Tonschriftart ist <a href="http://schristiancollins.com/generaluser.php">GeneralUser GS by S. Christian Collins</a>, und lizensiert unter GeneralUser GS License v2.0</string>
+
+    <!-- See here for translations:
+    https://en.wikipedia.org/wiki/Key_signature_names_and_translations -->
+    <string name="note_A">A</string>
+    <string name="note_B">H</string>
+    <string name="note_C">C</string>
+    <string name="note_D">D</string>
+    <string name="note_E">E</string>
+    <string name="note_F">F</string>
+    <string name="note_G">G</string>
+</resources>
