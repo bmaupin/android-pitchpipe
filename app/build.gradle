@@ -12,7 +12,7 @@ android {
         // In practice, anything under SDK 21 throws this error when the app tries to open: java.lang.IllegalArgumentException: bitmap size exceeds 32bits
         // For more details, in Android Studio go to File > New > New Project > Next > Help me choose
         minSdkVersion 15
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 8
         versionName "0.6.0"
 
