@@ -23,15 +23,10 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import jp.kshoji.javax.sound.midi.Receiver
 import jp.kshoji.javax.sound.midi.ShortMessage
-import java.util.*
-import kotlin.concurrent.schedule
 
-private const val NOTE_DURATION: Long = 5000
 private const val NOTE_VELOCITY = 127
 
 class MainActivity : AppCompatActivity() {
-    private var stopNoteTimer: TimerTask? = null
-
     private var synth: SoftSynthesizer? = null
     private var recv: Receiver? = null
 
@@ -248,12 +243,6 @@ class MainActivity : AppCompatActivity() {
         // Play the new note
         val notePitch = view.tag.toString().toInt()
         playMidiNote(notePitch)
-
-        // Schedule the current note to stop; midi is a streaming protocol and so the duration cannot be set when the note is played
-        // https://stackoverflow.com/a/54352394/399105
-        stopNoteTimer = Timer().schedule(NOTE_DURATION) {
-            stopAllMidiNotes()
-        }
     }
 
     private fun playMidiNote(notePitch: Int) {
@@ -261,8 +250,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun stopAllMidiNotes() {
-        // Cancel any currently running stopNoteTimer, otherwise it may trigger later while playing another note
-        stopNoteTimer?.cancel()
         // Stop any currently playing midi notes
         sendMidi(ShortMessage.CONTROL_CHANGE, 123, 0)
     }
