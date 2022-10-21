@@ -27,6 +27,8 @@ import jp.kshoji.javax.sound.midi.ShortMessage
 private const val NOTE_VELOCITY = 127
 
 class MainActivity : AppCompatActivity() {
+    // Valid MIDI notes start at 0, so use -1 to represent no currently playing note
+    private var currentPlayingNote: Int = -1
     private var synth: SoftSynthesizer? = null
     private var recv: Receiver? = null
 
@@ -236,22 +238,28 @@ class MainActivity : AppCompatActivity() {
         noteButtons.displayedChild = index
     }
 
-    fun playPitchPipeNote(view: View) {
-        // Stop all previous notes
-        stopAllMidiNotes()
-
-        // Play the new note
+    // If a note is currently being played and the same note is requested, stop the note. Otherwise
+    // stop any current note and then play the new note.
+    fun playOrStopNote(view: View) {
         val notePitch = view.tag.toString().toInt()
-        playMidiNote(notePitch)
+
+        if (currentPlayingNote == notePitch) {
+            stopAllMidiNotes()
+        } else {
+            stopAllMidiNotes()
+            playMidiNote(notePitch)
+        }
     }
 
     private fun playMidiNote(notePitch: Int) {
         sendMidi(ShortMessage.NOTE_ON, notePitch, NOTE_VELOCITY)
+        currentPlayingNote = notePitch
     }
 
     private fun stopAllMidiNotes() {
         // Stop any currently playing midi notes
         sendMidi(ShortMessage.CONTROL_CHANGE, 123, 0)
+        currentPlayingNote = -1
     }
 
     // Send a midi message, 3 bytes
