@@ -23,15 +23,12 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import jp.kshoji.javax.sound.midi.Receiver
 import jp.kshoji.javax.sound.midi.ShortMessage
-import java.util.*
-import kotlin.concurrent.schedule
 
-private const val NOTE_DURATION: Long = 5000
 private const val NOTE_VELOCITY = 127
 
 class MainActivity : AppCompatActivity() {
-    private var stopNoteTimer: TimerTask? = null
-
+    // Valid MIDI notes start at 0, so use -1 to represent no currently playing note
+    private var currentPlayingNote: Int = -1
     private var synth: SoftSynthesizer? = null
     private var recv: Receiver? = null
 
@@ -241,30 +238,28 @@ class MainActivity : AppCompatActivity() {
         noteButtons.displayedChild = index
     }
 
-    fun playPitchPipeNote(view: View) {
-        // Stop all previous notes
-        stopAllMidiNotes()
-
-        // Play the new note
+    // If a note is currently being played and the same note is requested, stop the note. Otherwise
+    // stop any current note and then play the new note.
+    fun playOrStopNote(view: View) {
         val notePitch = view.tag.toString().toInt()
-        playMidiNote(notePitch)
 
-        // Schedule the current note to stop; midi is a streaming protocol and so the duration cannot be set when the note is played
-        // https://stackoverflow.com/a/54352394/399105
-        stopNoteTimer = Timer().schedule(NOTE_DURATION) {
+        if (currentPlayingNote == notePitch) {
             stopAllMidiNotes()
+        } else {
+            stopAllMidiNotes()
+            playMidiNote(notePitch)
         }
     }
 
     private fun playMidiNote(notePitch: Int) {
         sendMidi(ShortMessage.NOTE_ON, notePitch, NOTE_VELOCITY)
+        currentPlayingNote = notePitch
     }
 
     private fun stopAllMidiNotes() {
-        // Cancel any currently running stopNoteTimer, otherwise it may trigger later while playing another note
-        stopNoteTimer?.cancel()
         // Stop any currently playing midi notes
         sendMidi(ShortMessage.CONTROL_CHANGE, 123, 0)
+        currentPlayingNote = -1
     }
 
     // Send a midi message, 3 bytes
